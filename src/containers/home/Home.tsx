@@ -1,11 +1,9 @@
 import React from 'react'
-import logo from '../../assets/images/tmt_logo.png'
-import './Landing.css'
+import './home.css'
 
-const Landing = (): JSX.Element => {
+const Home = (): JSX.Element => {
   return (
-    <div>
-      <img className='logo' alt='logo' src={logo} />
+    <div className='home'>
       <h3>Update src/App.tsx and save to reload.</h3>
 
       <h3>
@@ -18,4 +16,4 @@ const Landing = (): JSX.Element => {
   )
 }
 
-export default Landing
+export default Home

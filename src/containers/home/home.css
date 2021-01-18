@@ -1,9 +1,12 @@
-/* App wide global css goes in this file  */
+/* Component specific css goes in this file  */
+.link {
+  color: azure;
+}
 
-.App {
+.home {
   text-align: center;
-  background-color: #141631;
-  min-height: 100vh;
+  background-color: #8184ad;
+  height:inherit;
   display: flex;
   flex-direction: column;
   align-items: center;

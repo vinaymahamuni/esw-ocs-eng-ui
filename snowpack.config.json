@@ -5,7 +5,8 @@
   },
   "mount": {
     "public": "/",
-    "src": "/_dist_"
+    "src": "/dist",
+    "test": "/dist_test"
   },
   "plugins": [
     ["@snowpack/plugin-typescript"]
