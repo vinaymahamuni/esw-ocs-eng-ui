@@ -1,0 +1,13 @@
+{
+  "buildOptions": {
+    "clean": true,
+    "sourceMaps": false
+  },
+  "mount": {
+    "public": "/",
+    "src": "/_dist_"
+  },
+  "plugins": [
+    ["@snowpack/plugin-typescript"]
+  ]
+}
