@@ -17,10 +17,11 @@
     "test:unit": "web-test-runner 'test/**/*.test.tsx'",
     "test": "npm-run-all test:unit",
     "clean": "rm -rf dist && mkdir dist",
-    "prebuild": "npm-run-all --parallel clean fix",
+    "prebuild": "npm-run-all --parallel clean fix audit",
     "fix": "npm-run-all --parallel clean fix:eslint fix:prettier",
     "fix:eslint": "eslint --fix --config .eslintrc.js './**/*.{ts,tsx}'",
-    "fix:prettier": "prettier --write --config ./.prettierrc './**/*.{ts,tsx}' "
+    "fix:prettier": "prettier --write --config ./.prettierrc './**/*.{ts,tsx}' ",
+    "audit": "npm audit"
   },
   "browserslist": [
     "last 1 chrome version"
