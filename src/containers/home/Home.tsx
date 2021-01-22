@@ -1,6 +1,6 @@
 import React from 'react'
 import { ServiceProvider } from '../../context/ServiceContext'
-import SequenceManager from '../../component/SequenceManager'
+import SequenceManager from '../../components/SequenceManager'
 import { SMContextProvider } from '../../context/SMContext'
 
 const Home = () => {

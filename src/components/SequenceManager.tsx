@@ -12,7 +12,7 @@ import {
   spawnSequenceManager
 } from '../context/SMContext'
 
-const SequenceManager = () => {
+const SequenceManager = (): JSX.Element => {
   const { Agent } = useServiceState()
   const dispatch = useServiceDispatch()
   const { loading, spawned } = useSMState()
