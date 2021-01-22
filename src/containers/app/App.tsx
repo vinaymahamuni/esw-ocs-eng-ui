@@ -1,6 +1,7 @@
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import React from 'react'
+import NavComponent from '../../components/NavComponent'
 import './app.css'
 
 const { Header, Footer, Sider, Content } = Layout
@@ -11,7 +12,9 @@ interface AppProps {
 
 const App = ({ children }: AppProps): JSX.Element => (
   <Layout>
-    <Header>Header</Header>
+    <Header className='header'>
+      <NavComponent />
+    </Header>
     <Layout>
       <Sider style={{ backgroundColor: '#bbb' }}>Sider</Sider>
       <Content className='content'>{children}</Content>
