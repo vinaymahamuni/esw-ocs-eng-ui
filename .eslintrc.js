@@ -7,7 +7,8 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
-    'plugin:import/typescript'
+    'plugin:import/typescript',
+    'plugin:react-hooks/recommended'
   ],
   plugins: ['@typescript-eslint', 'prettier', 'import', 'react', 'react-hooks'],
   rules: {
