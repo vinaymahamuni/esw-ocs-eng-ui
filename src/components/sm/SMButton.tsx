@@ -1,43 +1,16 @@
-import { LocationService } from '@tmtsoftware/esw-ts'
 import React from 'react'
 import { withErrorBoundary } from 'react-error-boundary'
-import { useQuery } from 'react-query'
 import { ErrorFallback } from '../fallback/ErrorFallback'
-import {
-  agentPrefix,
-  obsModeConfig,
-  smComponentId,
-  smConnection
-} from './constants'
-import SMToggleButton from './SMToggleButton'
-
-const locationService = LocationService()
-
-const ShutdownSMButton = () => (
-  <SMToggleButton
-    btnName='Shutdown SM'
-    onClick={(agent) => agent.killComponent(smComponentId)}
-  />
-)
-
-const SpawnSMButton = () => (
-  <SMToggleButton
-    btnName='Spawn SM'
-    onClick={(agent) =>
-      agent.spawnSequenceManager(agentPrefix, obsModeConfig, false)
-    }
-  />
-)
+import { useSMStatus } from './queries/queries'
+import { ShutdownSMButton } from './ShutdownSMButton'
+import { SpawnSMButton } from './SpawnSMButton'
 
 function SMButton(): JSX.Element {
-  const { status, data, error } = useQuery('sm-status', () =>
-    locationService.find(smConnection)
-  )
-  console.log(status)
+  const query = useSMStatus()
 
-  if (status === 'loading') return <div>Loading...</div>
-  else if (status === 'error') return <div>Error {error}!</div>
-  else if (data) return <ShutdownSMButton />
+  if (query.isLoading) return <div>Loading...</div>
+  if (query.isError) return <div>Failed to fetch SM status {query.error}!</div>
+  if (query.data) return <ShutdownSMButton />
   else return <SpawnSMButton />
 }
 
