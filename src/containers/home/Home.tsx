@@ -1,8 +1,8 @@
 import React from 'react'
-import SequenceManager from '../../components/SequenceManager'
+import SMButtonNew from '../../components/sm/SMButton'
 
 const Home = (): JSX.Element => {
-  return <SequenceManager />
+  return <SMButtonNew />
 }
 
 export default Home
