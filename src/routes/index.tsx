@@ -7,6 +7,7 @@ const LoginError = () => <div>Please login to proceed</div>
 
 const Routes = (): JSX.Element => (
   <Switch>
+    <Route path='/users' render={() => <div>users page </div>} />
     <Route
       path='/'
       render={() => (
