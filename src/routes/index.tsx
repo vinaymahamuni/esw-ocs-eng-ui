@@ -3,11 +3,10 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Home from '../containers/home/Home'
 
-const LoginError = () => <div>Please login to proceed</div>
+const LoginError = () => <div>please login to proceed..</div>
 
 const Routes = (): JSX.Element => (
   <Switch>
-    <Route path='/users' render={() => <div>users page </div>} />
     <Route
       path='/'
       render={() => (
