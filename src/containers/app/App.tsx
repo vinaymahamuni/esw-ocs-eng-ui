@@ -1,11 +1,11 @@
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import React from 'react'
-import NavComponent from '../../components/NavComponent'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import MenuBar from '../../components/menu/MenuBar'
 import './app.css'
 
-const { Header, Footer, Sider, Content } = Layout
+const { Header, Content } = Layout
 
 const queryClient = new QueryClient()
 
@@ -17,13 +17,11 @@ const App = ({ children }: AppProps): JSX.Element => (
   <QueryClientProvider client={queryClient}>
     <Layout>
       <Header className='header'>
-        <NavComponent />
+        <MenuBar />
       </Header>
       <Layout>
-        <Sider style={{ backgroundColor: '#bbb' }}>Sider</Sider>
-        <Content className='content'>{children}</Content>
+        <Content className='content'>{children} </Content>
       </Layout>
-      <Footer>Footer</Footer>
     </Layout>
   </QueryClientProvider>
 )

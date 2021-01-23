@@ -1,34 +1,48 @@
+import { LoadingOutlined } from '@ant-design/icons'
 import { AgentService, AuthContext } from '@tmtsoftware/esw-ts'
 import { Button } from 'antd'
 import React, { useContext } from 'react'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 
-function SMToggleButton<T>(
-  btnName: string,
+const Spinner = () => (
+  <LoadingOutlined
+    style={{ fontSize: '25px', color: '#08c', marginLeft: '100px' }}
+  />
+)
+interface SMToggleButtonProps<T> {
+  btnName: string
   onClick: (agent: AgentService) => Promise<T>
-): JSX.Element {
+}
+
+export default function SMToggleButton<T>({
+  btnName,
+  onClick
+}: SMToggleButtonProps<T>): JSX.Element {
   const queryClient = useQueryClient()
   const { auth } = useContext(AuthContext)
   if (!auth) throw Error('Login to continue ...')
 
-  const agentService = AgentService(auth.token)
+  const agentQuery = useQuery('agent-service', () => AgentService(auth.token), {
+    retry: false
+  })
 
   const mutation = useMutation(
     btnName,
-    async () => {
-      const agent = await agentService
-      await onClick(agent)
-    },
+    (agent: AgentService) => onClick(agent),
     {
       onSuccess: () => queryClient.refetchQueries('sm-status')
     }
   )
 
+  if (agentQuery.isLoading) return <Spinner />
+  if (agentQuery.isError) throw agentQuery.error
+
   return (
-    <Button loading={mutation.isLoading} onClick={() => mutation.mutate()}>
+    <Button
+      type='primary'
+      loading={mutation.isLoading}
+      onClick={() => agentQuery.data && mutation.mutate(agentQuery.data)}>
       {btnName}
     </Button>
   )
 }
-
-export default SMToggleButton
