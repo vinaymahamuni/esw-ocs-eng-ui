@@ -4,9 +4,9 @@ import SMButton from '../../components/sm/SMButton'
 
 const Home = (): JSX.Element => (
   <>
-    <Row>
-      <Col span={18} push={6}>
-        <Card style={{ width: 300 }}>{<SMButton />}</Card>
+    <Row style={{ marginTop: '16px' }}>
+      <Col span={18} push={4}>
+        <Card style={{ width: 280 }}>{<SMButton />}</Card>
       </Col>
     </Row>
   </>

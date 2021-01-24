@@ -4,6 +4,7 @@ import React from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import MenuBar from '../../components/menu/MenuBar'
 import './app.css'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 const { Header, Content } = Layout
 
@@ -23,6 +24,7 @@ const App = ({ children }: AppProps): JSX.Element => (
         <Content className='content'>{children} </Content>
       </Layout>
     </Layout>
+    <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
 )
 

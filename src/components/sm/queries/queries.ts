@@ -13,7 +13,7 @@ export const useAgentService = (): UseQueryResult<AgentService, unknown> => {
   if (!auth) throw Error('Login to continue ...')
 
   return useQuery('agentService', () => AgentService(auth.token), {
-    retry: false
+    useErrorBoundary: true
   })
 }
 

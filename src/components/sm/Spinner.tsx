@@ -3,6 +3,6 @@ import React from 'react'
 
 export const Spinner = (): JSX.Element => (
   <LoadingOutlined
-    style={{ fontSize: '25px', color: '#08c', marginLeft: '100px' }}
+    style={{ fontSize: '25px', color: '#08c', marginLeft: '30px' }}
   />
 )
