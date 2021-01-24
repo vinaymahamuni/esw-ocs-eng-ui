@@ -1,49 +1,34 @@
-import React, { useEffect } from 'react'
-import { ComponentId, Prefix } from '@tmtsoftware/esw-ts'
-import { Button } from 'antd'
-import {
-  updateAgent,
-  useServiceDispatch,
-  useServiceState
-} from '../context/ServiceContext'
-import {
-  useSMDispatch,
-  useSMState,
-  spawnSequenceManager
-} from '../context/SMContext'
+import { AuthContext, TrackingEvent } from '@tmtsoftware/esw-ts'
+import React, { useContext, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocationService } from '../hooks/customHook'
+import { sequenceManager, SequenceManagerState } from '../store/store'
+import { ShutdownSMButton, SpawnSMButton } from './sm/SMButton'
+import { smConnection } from './sm/constants'
 
 const SequenceManager = (): JSX.Element => {
-  const { Agent } = useServiceState()
-  const dispatch = useServiceDispatch()
-  const { loading, spawned } = useSMState()
-  const smDispatch = useSMDispatch()
+  const { isSpawned } = useSelector((state: SequenceManagerState) => state)
+  const dispatch = useDispatch()
 
-  useEffect(() => {
-    updateAgent(dispatch)
-  }, [])
+  const { auth } = useContext(AuthContext)
+  if (!auth) throw Error('Login to proceed ...')
 
-  const shutDownSequenceManager = () => {
-    Agent?.killComponent(
-      new ComponentId(Prefix.fromString('ESW.sequence_manager'), 'Service')
-    )
+  const [locationService] = useLocationService()
+
+  const updateSmState = (trackingEvent: TrackingEvent) => {
+    if (trackingEvent._type === 'LocationRemoved') {
+      dispatch(sequenceManager.actions.killed())
+    } else if (trackingEvent._type === 'LocationUpdated') {
+      dispatch(sequenceManager.actions.spawned())
+    }
   }
 
-  return (
-    <>
-      {Agent && !spawned && (
-        <Button
-          loading={loading}
-          onClick={() => spawnSequenceManager(Agent, smDispatch)}>
-          Spawn SM
-        </Button>
-      )}
-      {Agent && spawned && (
-        <Button loading={loading} onClick={shutDownSequenceManager}>
-          Shutdown SM
-        </Button>
-      )}
-    </>
-  )
+  useEffect(() => {
+    locationService?.track(smConnection)(updateSmState)
+  }, [])
+
+  if (isSpawned) return <ShutdownSMButton />
+  else return <SpawnSMButton />
 }
 
 export default SequenceManager
