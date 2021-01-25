@@ -1,5 +1,18 @@
-import { AgentService, AuthContext, LocationService } from '@tmtsoftware/esw-ts'
+import {
+  AgentService,
+  AuthContext,
+  LocationService,
+  ServiceError
+} from '@tmtsoftware/esw-ts'
+import message from 'antd/lib/message'
 import { useContext, useEffect, useState } from 'react'
+
+export const openError = (error: ServiceError | Error) => {
+  message.error({
+    content: error.message,
+    duration: 3
+  })
+}
 
 export const useAgent = (): [AgentService | null] => {
   const { auth } = useContext(AuthContext)
@@ -9,10 +22,9 @@ export const useAgent = (): [AgentService | null] => {
   }
   const [agent, setAgent] = useState<AgentService | null>(null)
   useEffect(() => {
-    console.log('setting agent')
     AgentService(() => token)
       .then((agent) => setAgent(agent))
-      .catch(console.error)
+      .catch((error) => openError(error))
   }, [token])
 
   return [agent]
@@ -26,7 +38,7 @@ export const useLocationService = (): [LocationService | null] => {
 
   useEffect(() => {
     const instance = LocationService()
-    if (!instance) throw new Error('location service is not up')
+    if (!instance) openError(new Error('location service is not up'))
     setLocationService(instance)
   }, [])
 
