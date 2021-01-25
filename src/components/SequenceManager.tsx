@@ -28,7 +28,7 @@ const SequenceManager = (): JSX.Element => {
   }, [])
 
   if (isSpawned) return <ShutdownSMButton />
-  else return <SpawnSMButton />
+  return <SpawnSMButton />
 }
 
 export default SequenceManager
