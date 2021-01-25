@@ -3,8 +3,8 @@ import React from 'react'
 import { withErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback } from '../fallback/ErrorFallback'
 import { useSMStatus } from './queries/queries'
-import { ShutdownSMButton } from './ShutdownSMButton'
-import { SpawnSMButton } from './SpawnSMButton'
+import { ShutdownSMButton } from './shutdown/ShutdownButton'
+import { SpawnSMButton } from './spawn/SpawnButton'
 
 const SMButton = (): JSX.Element => {
   const query = useSMStatus()

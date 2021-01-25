@@ -2,7 +2,8 @@ import {
   AgentService,
   AuthContext,
   LocationService,
-  Option
+  Option,
+  Prefix
 } from '@tmtsoftware/esw-ts'
 import { useContext } from 'react'
 import { useQuery, UseQueryResult } from 'react-query'
@@ -22,3 +23,12 @@ export const smStatusKey = 'smStatus'
 
 export const useSMStatus = (): UseQueryResult<Option<Location>, unknown> =>
   useQuery(smStatusKey, () => locationService.find(smConnection))
+
+export const useAgents = (): UseQueryResult<Prefix[], unknown> => {
+  const getAllAgentPrefix = async () => {
+    const agents = await locationService.listByComponentType('Machine')
+    return agents.map((l) => l.connection.prefix)
+  }
+
+  return useQuery('listAgents', getAllAgentPrefix)
+}
