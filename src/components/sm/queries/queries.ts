@@ -19,5 +19,6 @@ export const useAgentService = (): UseQueryResult<AgentService, unknown> => {
 
 const locationService = LocationService()
 export const smStatusKey = 'smStatus'
+
 export const useSMStatus = (): UseQueryResult<Option<Location>, unknown> =>
   useQuery(smStatusKey, () => locationService.find(smConnection))

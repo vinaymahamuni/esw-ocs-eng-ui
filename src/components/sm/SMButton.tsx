@@ -1,4 +1,4 @@
-import { Space, Typography } from 'antd'
+import { Space } from 'antd'
 import React from 'react'
 import { withErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback } from '../fallback/ErrorFallback'
@@ -11,7 +11,7 @@ const SMButton = (): JSX.Element => {
 
   if (query.isLoading) return <div>Loading...</div>
   return (
-    <Space>
+    <Space align='center'>
       Sequence Manager
       {query.data ? <ShutdownSMButton /> : <SpawnSMButton />}
     </Space>
