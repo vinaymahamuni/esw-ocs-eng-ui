@@ -1,10 +1,11 @@
 import { AgentService, Prefix } from '@tmtsoftware/esw-ts'
-import { Button, Modal, Select, message } from 'antd'
+import { Button, message, Modal } from 'antd'
 import React, { useState } from 'react'
-import { obsModeConfig } from '../constants'
-import { useAgentService, useAgents } from '../queries/queries'
-import { useMutateSM } from '../queries/useSMAction'
+import { SelectAgent } from '../../../agent/components/SelectAgent'
+import { obsModeConfig } from '../../constants'
+import { useMutateSM } from '../../queries/useSMAction'
 import { Spinner } from '../Spinner'
+import { useAgentService } from '../../../agent/queries/useAgentService'
 
 const spawnSM = (agentPrefix: string) => (agent: AgentService) =>
   agent
@@ -19,7 +20,6 @@ export const SpawnSMButton = (): JSX.Element => {
   const [agentPrefix, setAgentPrefix] = useState('')
 
   const agentServiceQuery = useAgentService()
-  const allAgentQuery = useAgents()
 
   const mutation = useMutateSM(
     spawnSM(agentPrefix),
@@ -33,7 +33,7 @@ export const SpawnSMButton = (): JSX.Element => {
         (await mutation.mutateAsync(agentServiceQuery.data))
       setModalVisible(false)
     } else {
-      message.error(`Please select agent prefix!`)
+      message.error(`Please select agent!`)
     }
   }
 
@@ -57,22 +57,7 @@ export const SpawnSMButton = (): JSX.Element => {
         confirmLoading={mutation.isLoading}
         onOk={handleModalOk}
         onCancel={handleModalCancel}>
-        <Select
-          showSearch
-          style={{ width: 200 }}
-          placeholder='Select a agent'
-          optionFilterProp='children'
-          onChange={handleOnChange}>
-          {allAgentQuery.data &&
-            allAgentQuery.data.map((agentPrefix) => {
-              const agentName = agentPrefix.toJSON()
-              return (
-                <Select.Option value={agentName} key={agentName}>
-                  {agentName}
-                </Select.Option>
-              )
-            })}
-        </Select>
+        <SelectAgent onChange={handleOnChange} />
       </Modal>
     </>
   )

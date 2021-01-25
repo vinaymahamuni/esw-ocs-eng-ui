@@ -1,6 +1,6 @@
 import { Card, Col, Row } from 'antd'
 import React from 'react'
-import SMButton from '../../components/sm/SMButton'
+import SMButton from '../../features/sm/components/SMButton'
 
 const Home = (): JSX.Element => (
   <>
