@@ -1,10 +1,10 @@
-import { Space } from 'antd'
+import { Space, Typography } from 'antd'
 import React from 'react'
 import { withErrorBoundary } from 'react-error-boundary'
-import { ErrorFallback } from '../../../components/fallback/ErrorFallback'
 import { useSMStatus } from '../queries/useSMStatus'
 import { ShutdownSMButton } from './shutdown/ShutdownButton'
 import { SpawnSMButton } from './spawn/SpawnButton'
+import { ErrorFallback } from '../../../components/ErrorFallback/ErrorFallback'
 
 const SMButton = (): JSX.Element => {
   const query = useSMStatus()
@@ -12,7 +12,7 @@ const SMButton = (): JSX.Element => {
   if (query.isLoading) return <div>Loading...</div>
   return (
     <Space align='center'>
-      Sequence Manager
+      <Typography.Title level={5}> Sequence Manager </Typography.Title>
       {query.data ? <ShutdownSMButton /> : <SpawnSMButton />}
     </Space>
   )

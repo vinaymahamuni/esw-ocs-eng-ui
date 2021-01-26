@@ -3,7 +3,7 @@ import { message } from 'antd'
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query'
 import { smStatusKey } from './useSMStatus'
 
-export const useMutateSM = <T>(
+export const useSMAction = <T>(
   mutationFn: (agent: AgentService) => Promise<T>,
   successMsg: string,
   errorMsg: string

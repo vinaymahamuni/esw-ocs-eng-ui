@@ -1,9 +1,9 @@
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import type { AgentService } from '@tmtsoftware/esw-ts'
-import { Button, Modal } from 'antd'
+import { Button, Modal, Typography } from 'antd'
 import React from 'react'
 import { smComponentId } from '../../constants'
-import { useMutateSM } from '../../queries/useSMAction'
+import { useSMAction } from '../../queries/useSMAction'
 import { Spinner } from '../Spinner'
 import { useAgentService } from '../../../agent/queries/useAgentService'
 
@@ -34,7 +34,7 @@ const killSM = (agent: AgentService) =>
 export const ShutdownSMButton = (): JSX.Element => {
   const agentQuery = useAgentService()
 
-  const mutation = useMutateSM(
+  const mutation = useSMAction(
     killSM,
     'Successfully shutdown Sequence Manager',
     'Failed to shutdown Sequence Manager'
@@ -45,6 +45,7 @@ export const ShutdownSMButton = (): JSX.Element => {
   return (
     <Button
       type='primary'
+      size='large'
       loading={mutation.isLoading}
       onClick={() =>
         agentQuery.data &&

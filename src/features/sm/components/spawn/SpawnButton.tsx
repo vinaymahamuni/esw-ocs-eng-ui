@@ -1,9 +1,9 @@
 import { AgentService, Prefix } from '@tmtsoftware/esw-ts'
-import { Button, message, Modal } from 'antd'
+import { Button, message, Modal, Typography } from 'antd'
 import React, { useState } from 'react'
 import { SelectAgent } from '../../../agent/components/SelectAgent'
 import { obsModeConfig } from '../../constants'
-import { useMutateSM } from '../../queries/useSMAction'
+import { useSMAction } from '../../queries/useSMAction'
 import { Spinner } from '../Spinner'
 import { useAgentService } from '../../../agent/queries/useAgentService'
 
@@ -21,7 +21,7 @@ export const SpawnSMButton = (): JSX.Element => {
 
   const agentServiceQuery = useAgentService()
 
-  const mutation = useMutateSM(
+  const mutation = useSMAction(
     spawnSM(agentPrefix),
     'Successfully spawned Sequence Manager',
     'Failed to spawn Sequence Manager'
@@ -46,6 +46,7 @@ export const SpawnSMButton = (): JSX.Element => {
     <>
       <Button
         type='primary'
+        size='large'
         loading={mutation.isLoading}
         onClick={() => setModalVisible(true)}>
         Spawn
