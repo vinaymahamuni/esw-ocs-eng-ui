@@ -1,17 +1,16 @@
-import { Login, Logout } from '@tmtsoftware/esw-ts'
-import React from 'react'
+import { AuthContext, Login, Logout } from '@tmtsoftware/esw-ts'
+import { Space } from 'antd'
+import React, { useContext } from 'react'
 
 const NavComponent = (): JSX.Element => {
+  const { auth } = useContext(AuthContext)
   return (
-    <nav className='indigo'>
-      <div className='nav-wrapper'>
-        <a href='https://www.tmt.org/' className='brand-logo'>
-          TMT
-        </a>
-        <Login />
-        <Logout />
-      </div>
-    </nav>
+    <Space direction='horizontal' align='center'>
+      <a href='https://www.tmt.org/' className='brand-logo'>
+        TMT
+      </a>
+      {auth && auth.isAuthenticated() ? <Logout /> : <Login />}
+    </Space>
   )
 }
 

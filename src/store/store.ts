@@ -1,27 +1,17 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import SequenceManager, {
+  SequenceManagerState
+} from '../components/sm/SequenceManagerStore'
 
-export type SequenceManagerState = {
-  isSpawned: boolean
-  loading: boolean
-}
-
-const reducers = {
-  startLoading: (state: SequenceManagerState) => ({ ...state, loading: true }),
-  spawned: () => ({ loading: false, isSpawned: true }),
-  killed: () => ({ loading: false, isSpawned: false }),
-  error: (state: SequenceManagerState) => ({ ...state, loading: false })
-}
-const sequenceManager = createSlice<SequenceManagerState, typeof reducers>({
-  name: 'SequenceManager',
-  initialState: {
-    isSpawned: false,
-    loading: false
-  },
-  reducers
+const reducers = combineReducers({
+  SequenceManager: SequenceManager.reducer
 })
 
 const store = configureStore({
-  reducer: sequenceManager.reducer
+  reducer: reducers
 })
 
-export { store, sequenceManager }
+export type AppRootState = {
+  SequenceManager: SequenceManagerState
+}
+export { store }
