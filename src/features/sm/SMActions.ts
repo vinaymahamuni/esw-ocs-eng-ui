@@ -1,13 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AgentService, ComponentId, Prefix } from '@tmtsoftware/esw-ts'
-import { openError } from '../../hooks/customHook'
-import SequenceManager from './SequenceManagerStore'
+import { openError } from '../../hooks/openError'
+import SequenceManager from '../../features/sm/SequenceManagerStore'
 
 export const KillSM = createAsyncThunk(
   'KillSM',
   async (agent: AgentService, { dispatch }) => {
     const { actions } = SequenceManager
-    dispatch(actions.startLoading())
     try {
       const spawned = await agent.killComponent(
         new ComponentId(Prefix.fromString('ESW.sequence_manager'), 'Service')
@@ -23,12 +22,15 @@ export const KillSM = createAsyncThunk(
 
 export const SpawnSM = createAsyncThunk(
   'SpawnSM',
-  async (agent: AgentService, { dispatch }) => {
+  async (
+    { agent, prefix }: { agent: AgentService; prefix: Prefix },
+    { dispatch }
+  ) => {
     const { actions } = SequenceManager
     dispatch(actions.startLoading())
     try {
       const spawned = await agent.spawnSequenceManager(
-        Prefix.fromString('ESW.primary'),
+        prefix,
         'smObsModeConfig.conf',
         false
       )

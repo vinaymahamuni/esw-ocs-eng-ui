@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { openError } from '../../hooks/customHook'
+import { openError } from '../../hooks/openError'
 import { KillSM, SpawnSM } from './SMActions'
 
 export type SequenceManagerState = {

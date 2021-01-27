@@ -1,11 +1,12 @@
 import type { TrackingEvent } from '@tmtsoftware/esw-ts'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocationService } from '../hooks/customHook'
-import type { AppRootState } from '../store/store'
-import SequenceManagerStore from './sm/SequenceManagerStore'
-import { ShutdownSMButton, SpawnSMButton } from './sm/SMButton'
-import { smConnection } from './sm/constants'
+import { useLocationService } from '../../../hooks/locationHooks'
+import type { AppRootState } from '../../../store/store'
+import SequenceManagerStore from '../SequenceManagerStore'
+import { smConnection } from '../../constants'
+import { ShutdownSMButton } from './ShutdownSMButton'
+import { SpawnSMButton } from './SpawnSMButton'
 
 const SequenceManager = (): JSX.Element => {
   const { isSpawned } = useSelector(
@@ -31,7 +32,7 @@ const SequenceManager = (): JSX.Element => {
         dispatch(actions.spawned())
       }
     })
-  }, [actions, dispatch, locationService, updateSmState])
+  }, [locationService])
 
   if (isSpawned) return <ShutdownSMButton />
   return <SpawnSMButton />

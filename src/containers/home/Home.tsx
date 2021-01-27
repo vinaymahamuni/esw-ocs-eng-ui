@@ -1,5 +1,5 @@
 import React from 'react'
-import SequenceManager from '../../components/SequenceManager'
+import SequenceManager from '../../features/sm/components/SequenceManager'
 
 const Home = () => {
   return <SequenceManager />

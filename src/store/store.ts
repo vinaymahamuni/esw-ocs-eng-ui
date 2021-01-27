@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import SequenceManager, {
   SequenceManagerState
-} from '../components/sm/SequenceManagerStore'
+} from '../features/sm/SequenceManagerStore'
+import Agents, { AgentsState } from '../features/agent/AgentStore'
 
 const reducers = combineReducers({
-  SequenceManager: SequenceManager.reducer
+  SequenceManager: SequenceManager.reducer,
+  Agents: Agents.reducers
 })
 
 const store = configureStore({
@@ -13,5 +15,6 @@ const store = configureStore({
 
 export type AppRootState = {
   SequenceManager: SequenceManagerState
+  Agents: AgentsState
 }
 export { store }
