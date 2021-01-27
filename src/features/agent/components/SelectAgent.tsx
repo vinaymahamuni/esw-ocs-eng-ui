@@ -1,6 +1,6 @@
 import { Select } from 'antd'
 import React from 'react'
-import { useAgents } from '../queries/useAgents'
+import { useAgents } from '../hooks/useAgents'
 
 interface SelectAgentProps {
   onChange: (value: string) => void

@@ -1,11 +1,11 @@
 import { AgentService, Prefix } from '@tmtsoftware/esw-ts'
-import { Button, message, Modal, Typography } from 'antd'
+import { Button, message, Modal } from 'antd'
 import React, { useState } from 'react'
 import { SelectAgent } from '../../../agent/components/SelectAgent'
+import { useAgentService } from '../../../agent/hooks/useAgentService'
 import { obsModeConfig } from '../../constants'
-import { useSMAction } from '../../queries/useSMAction'
+import { useSMAction } from '../../hooks/useSMAction'
 import { Spinner } from '../Spinner'
-import { useAgentService } from '../../../agent/queries/useAgentService'
 
 const spawnSM = (agentPrefix: string) => (agent: AgentService) =>
   agent

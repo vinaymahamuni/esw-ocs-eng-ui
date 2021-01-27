@@ -1,11 +1,11 @@
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import type { AgentService } from '@tmtsoftware/esw-ts'
-import { Button, Modal, Typography } from 'antd'
+import { Button, Modal } from 'antd'
 import React from 'react'
+import { useAgentService } from '../../../agent/hooks/useAgentService'
 import { smComponentId } from '../../constants'
-import { useSMAction } from '../../queries/useSMAction'
+import { useSMAction } from '../../hooks/useSMAction'
 import { Spinner } from '../Spinner'
-import { useAgentService } from '../../../agent/queries/useAgentService'
 
 function showConfirm<T>(
   onYes: () => Promise<T>,

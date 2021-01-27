@@ -1,7 +1,7 @@
 import { Space, Typography } from 'antd'
 import React from 'react'
 import { withErrorBoundary } from 'react-error-boundary'
-import { useSMStatus } from '../queries/useSMStatus'
+import { useSMStatus } from '../hooks/useSMStatus'
 import { ShutdownSMButton } from './shutdown/ShutdownButton'
 import { SpawnSMButton } from './spawn/SpawnButton'
 import { ErrorFallback } from '../../../components/ErrorFallback/ErrorFallback'
