@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'antd'
-import { useAgent } from '../../hooks/customHook'
+import { useAgentService } from '../../hooks/customHook'
 import { useDispatch, useSelector } from 'react-redux'
 import type { Dispatch } from '@reduxjs/toolkit'
 import type { SequenceManagerState } from './SequenceManagerStore'
@@ -25,7 +25,7 @@ const SMToggleButton = (
 
 export const ShutdownSMButton = (): JSX.Element => {
   const dispatch = useDispatch()
-  const [agent] = useAgent()
+  const [agent] = useAgentService()
   const agentServiceDoesNotExists = !agent ? true : false
 
   return SMToggleButton('Shutdown SM', agentServiceDoesNotExists, () => {
@@ -36,10 +36,9 @@ export const ShutdownSMButton = (): JSX.Element => {
 
 export const SpawnSMButton = (): JSX.Element => {
   const dispatch = useDispatch()
-  const [agent] = useAgent()
-  const agentServiceDoesNotExists = agent ? false : true
+  const [agent] = useAgentService()
 
-  return SMToggleButton('Spawn SM', agentServiceDoesNotExists, () => {
+  return SMToggleButton('Spawn SM', !!agent, () => {
     if (agent) dispatch(SpawnSM(agent))
     else throw new Error('Agent service not up')
   })

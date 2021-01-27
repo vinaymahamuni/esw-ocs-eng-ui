@@ -14,7 +14,7 @@ export const openError = (error: ServiceError | Error) => {
   })
 }
 
-export const useAgent = (): [AgentService | null] => {
+export const useAgentService = (): [AgentService | null] => {
   const { auth } = useContext(AuthContext)
   const token = auth?.token()
   if (!auth) {

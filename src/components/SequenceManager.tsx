@@ -31,7 +31,7 @@ const SequenceManager = (): JSX.Element => {
         dispatch(actions.spawned())
       }
     })
-  }, [locationService])
+  }, [actions, dispatch, locationService, updateSmState])
 
   if (isSpawned) return <ShutdownSMButton />
   return <SpawnSMButton />
