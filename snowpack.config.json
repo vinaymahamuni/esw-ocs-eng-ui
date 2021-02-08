@@ -5,7 +5,7 @@
   },
   "mount": {
     "public": "/",
-    "src": "/dist",
+    "src": "/_dist_",
     "test": "/dist_test"
   },
   "plugins": [
