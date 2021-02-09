@@ -1,43 +1,71 @@
 import { Card, Col, Typography, Row } from 'antd'
-import { SettingOutlined } from '@ant-design/icons'
+import Icon, { SettingOutlined } from '@ant-design/icons'
 import React from 'react'
 import SMButton from '../../features/sm/components/SMButton'
 import styles from './home.module.css'
+import globalStyles from '../../index.module.css'
+import { Link } from 'react-router-dom'
+import TelescopeIcon from '../../assets/images/icons/Telescope.png'
+import InfraIcon from '../../assets/images/icons/Infrastructure.png'
 
-const HomePageCard = (text: string, icon: JSX.Element) => (
-  <Card title={icon}>
-    <Typography.Title level={4}>{text}</Typography.Title>
-  </Card>
+type CardDetail = {
+  title: string
+  icon: JSX.Element
+  link: string
+}
+const HomePageCard = (x: CardDetail) => (
+  <Link to={x.link}>
+    <Card hoverable title={x.icon} className={styles.homePageCards}>
+      <Typography.Title level={5} className={styles.header24Bold}>
+        {x.title}
+      </Typography.Title>
+    </Card>
+  </Link>
 )
 
-const cards = [
+const cards: CardDetail[] = [
   {
     title: 'Manage Infrastructure',
-    icon: <SettingOutlined className={styles.iconSize} />
+    icon: (
+      <Icon
+        component={() => (
+          <img src={InfraIcon} className={styles.commonIconSize} />
+        )}
+      />
+    ),
+    link: '/Infrastructure'
   },
   {
     title: 'Manage Observations',
-    icon: <SettingOutlined className={styles.iconSize} />
+    icon: (
+      <Icon
+        component={() => (
+          <img src={TelescopeIcon} className={styles.commonIconSize} />
+        )}
+      />
+    ),
+    link: '/Observations'
   },
   {
     title: 'Resources',
-    icon: <SettingOutlined className={styles.iconSize} />
+    icon: <SettingOutlined className={styles.settingsIcon} />,
+    link: '/Resources'
   }
 ]
 
 const Home = (): JSX.Element => (
   <>
     <Row justify={'center'}>
-      <Col span={8}>
+      <Col span={10}>
         <Card>{<SMButton />}</Card>
       </Col>
     </Row>
-    <Row align={'middle'} style={{ minHeight: 'inherit' }}>
+    <Row align={'middle'} className={styles.inheritMinHeight}>
       <Col span={24}>
         <Row gutter={[32, 32]}>
           {cards.map((x, index) => (
             <Col key={index} span={8}>
-              {HomePageCard(x.title, x.icon)}
+              {HomePageCard(x)}
             </Col>
           ))}
         </Row>

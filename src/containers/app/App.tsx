@@ -15,23 +15,25 @@ interface AppProps {
   children: React.ReactNode
 }
 
-const App = ({ children }: AppProps): JSX.Element => (
-  <QueryClientProvider client={queryClient}>
-    <Layout>
-      <Header className={styles.tmtHeader}>
-        <MenuBar />
-      </Header>
-      <Layout className={styles.content}>
-        <Sider />
-        <Layout className={styles.content}>
-          <Content className={[styles.content, styles.home].join(' ')}>
-            {children}
-          </Content>
+const App = ({ children }: AppProps): JSX.Element => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Layout>
+        <Header className={styles.tmtHeader}>
+          <MenuBar />
+        </Header>
+        <Layout>
+          <Sider />
+          <Layout>
+            <Content className={[styles.content, styles.home].join(' ')}>
+              {children}
+            </Content>
+          </Layout>
         </Layout>
       </Layout>
-    </Layout>
-    <ReactQueryDevtools initialIsOpen={false} />
-  </QueryClientProvider>
-)
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  )
+}
 
 export default App

@@ -13,7 +13,7 @@ const SMButton = (): JSX.Element => {
   if (query.isLoading) return <div>Loading...</div>
   return (
     <div className={styles.smCard}>
-      <Typography.Title level={5}> Sequence Manager </Typography.Title>
+      <Typography.Title level={4}> Sequence Manager </Typography.Title>
       {query.data ? <ShutdownSMButton /> : <SpawnSMButton />}
     </div>
   )

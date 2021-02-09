@@ -10,5 +10,5 @@
   display: flex;
   float: right;
   align-items: flex-end;
-  position: absolute; /*or fixed*/
+  position: absolute;
 }

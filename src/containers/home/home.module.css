@@ -1,3 +1,30 @@
-.iconSize {
+.commonIconSize {
   font-size: 64px;
+  height: 64px;
+  width: 64px;
+}
+
+.settingsIcon {
+  composes: commonIconSize;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.header24Bold {
+  font-size: 24px !important;
+  line-height: 32px !important;
+  font-weight: 500 !important;
+}
+
+.inheritMinHeight {
+  min-height: inherit;
+}
+
+.homePageCards {
+  height: '200px';
+}
+
+.header20Bold {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
 }

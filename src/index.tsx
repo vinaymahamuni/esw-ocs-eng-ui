@@ -5,7 +5,7 @@ import { HashRouter as Router } from 'react-router-dom'
 import GlobalSpinner from './components/GlobalSpinner/GlobalSpinner'
 import { AppConfig } from './config/AppConfig'
 import App from './containers/app/App'
-import './index.css'
+import './index.module.css'
 import Routes from './routes'
 
 render(

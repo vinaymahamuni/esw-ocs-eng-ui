@@ -10,6 +10,6 @@ const CheckLogin = ({ children, error }: CheckLoginProps): JSX.Element => {
   const { auth } = useContext(AuthContext)
   const node =
     auth && auth.isAuthenticated && auth.isAuthenticated() ? children : error
-  return <div>{node}</div>
+  return <div style={{ minHeight: 'inherit' }}>{node}</div>
 }
 export default CheckLogin

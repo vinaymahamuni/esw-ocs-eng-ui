@@ -18,14 +18,15 @@ const MenuBar = (): JSX.Element => {
       title: 'Logging out',
       icon: <LogoutOutlined twoToneColor={'blue'} />,
       okText: 'Logout',
-      cancelText: 'cancel',
+      cancelText: 'Cancel',
+      okType: 'danger',
       onOk: () => {
         logout()
       }
     })
   }
   const Logout = () => (
-    <Button type='text' onClick={confirmLogout} icon={<DownOutlined />}>
+    <Button type='text' onClick={confirmLogout} /*icon={<DownOutlined />}*/>
       {username?.toUpperCase()}
     </Button>
   )
@@ -38,8 +39,8 @@ const MenuBar = (): JSX.Element => {
 
   return (
     <>
-      <img src={TMTLogo} className={styles.logo} />
       {auth?.isAuthenticated() ? <Logout /> : <Login />}
+      <img src={TMTLogo} className={styles.logo} />
     </>
   )
 }

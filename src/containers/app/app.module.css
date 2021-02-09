@@ -6,6 +6,11 @@
 .sider {
   min-width: 14% !important;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 22px;
+  text-align: left;
 }
 
 .tmtHeader {
@@ -18,4 +23,12 @@
 
 .home {
   margin: 0 60px;
+}
+
+.menuItem {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 40px;
 }
