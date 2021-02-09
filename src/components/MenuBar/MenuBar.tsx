@@ -1,8 +1,10 @@
-import { LoginOutlined, LogoutOutlined } from '@ant-design/icons'
-import { AuthContext } from '@tmtsoftware/esw-ts'
-import { Button, Menu } from 'antd'
-import React, { useContext, useState, useEffect } from 'react'
+import { LogoutOutlined, DownOutlined } from '@ant-design/icons'
 
+import { AuthContext } from '@tmtsoftware/esw-ts'
+import { Button, Modal } from 'antd'
+import React, { useContext, useState, useEffect } from 'react'
+import TMTLogo from '../../assets/images/TMT_Logo.png'
+import styles from './menubar.module.css'
 const MenuBar = (): JSX.Element => {
   const { auth, login, logout } = useContext(AuthContext)
   const [username, setUsername] = useState<string | undefined>(undefined)
@@ -11,23 +13,34 @@ const MenuBar = (): JSX.Element => {
     auth?.loadUserProfile().then((n) => setUsername(n.username))
   }, [auth])
 
+  const confirmLogout = () => {
+    Modal.confirm({
+      title: 'Logging out',
+      icon: <LogoutOutlined twoToneColor={'blue'} />,
+      okText: 'Logout',
+      cancelText: 'cancel',
+      onOk: () => {
+        logout()
+      }
+    })
+  }
   const Logout = () => (
-    <Button type='primary' onClick={logout} icon={<LogoutOutlined />}>
-      Logout
+    <Button type='text' onClick={confirmLogout} icon={<DownOutlined />}>
+      {username?.toUpperCase()}
     </Button>
   )
 
   const Login = () => (
-    <Button type='primary' onClick={login} icon={<LoginOutlined />}>
+    <Button type='text' onClick={login} icon={<DownOutlined />}>
       Login
     </Button>
   )
 
   return (
-    <Menu mode='horizontal' theme='dark' style={{ float: 'right' }}>
-      <Menu.Item>{username ?? null}</Menu.Item>
-      <Menu.Item>{auth?.isAuthenticated() ? <Logout /> : <Login />}</Menu.Item>
-    </Menu>
+    <>
+      <img src={TMTLogo} className={styles.logo} />
+      {auth?.isAuthenticated() ? <Logout /> : <Login />}
+    </>
   )
 }
 

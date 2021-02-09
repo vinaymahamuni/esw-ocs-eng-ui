@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import MenuBar from '../../components/MenuBar/MenuBar'
 import { Sider } from '../Sider/Sider'
-import './App.css'
+import styles from './app.module.css'
 
 const { Header, Content } = Layout
 
@@ -17,14 +17,16 @@ interface AppProps {
 
 const App = ({ children }: AppProps): JSX.Element => (
   <QueryClientProvider client={queryClient}>
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider />
-      <Layout className='site-layout'>
-        <Header className='site-layout-background' style={{ padding: 0 }}>
-          <MenuBar />
-        </Header>
-        <Layout>
-          <Content style={{ margin: '0 60px' }}>{children} </Content>
+    <Layout>
+      <Header className={styles.tmtHeader}>
+        <MenuBar />
+      </Header>
+      <Layout className={styles.content}>
+        <Sider />
+        <Layout className={styles.content}>
+          <Content className={[styles.content, styles.home].join(' ')}>
+            {children}
+          </Content>
         </Layout>
       </Layout>
     </Layout>

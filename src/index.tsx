@@ -13,7 +13,7 @@ render(
     <Router>
       <AuthContextProvider config={AppConfig}>
         <App>
-          <GlobalSpinner />
+          {/* <GlobalSpinner /> */}
           <Routes />
         </App>
       </AuthContextProvider>

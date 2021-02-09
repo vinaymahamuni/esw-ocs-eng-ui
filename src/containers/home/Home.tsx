@@ -1,45 +1,46 @@
-import { Breadcrumb, Card, Col, Divider, Row } from 'antd'
+import { Card, Col, Typography, Row } from 'antd'
+import { SettingOutlined } from '@ant-design/icons'
 import React from 'react'
 import SMButton from '../../features/sm/components/SMButton'
-const { Meta } = Card
+import styles from './home.module.css'
 
-const Box = ({ src, title }: { src: string; title: string }) => (
-  <Card cover={<img alt={title} src={src} />}>
-    <Meta title={title} />
+const HomePageCard = (text: string, icon: JSX.Element) => (
+  <Card title={icon}>
+    <Typography.Title level={4}>{text}</Typography.Title>
   </Card>
 )
 
-const ManageObservation = () => (
-  <Box
-    src='https://mediad.publicbroadcasting.net/p/khpr/files/styles/x_large/public/201811/image-1.jpeg'
-    title='Manage Observation'
-  />
-)
-
-const ManageInfrastructure = () => (
-  <Box
-    src='https://mediad.publicbroadcasting.net/p/khpr/files/styles/x_large/public/201811/image-1.jpeg'
-    title='Manage Infrastructure'
-  />
-)
+const cards = [
+  {
+    title: 'Manage Infrastructure',
+    icon: <SettingOutlined className={styles.iconSize} />
+  },
+  {
+    title: 'Manage Observations',
+    icon: <SettingOutlined className={styles.iconSize} />
+  },
+  {
+    title: 'Resources',
+    icon: <SettingOutlined className={styles.iconSize} />
+  }
+]
 
 const Home = (): JSX.Element => (
   <>
-    <Breadcrumb style={{ margin: '16px 0' }}>
-      <Breadcrumb.Item>Home</Breadcrumb.Item>
-    </Breadcrumb>
-    <Row gutter={[32, 32]}>
-      <Col span={10}>
+    <Row justify={'center'}>
+      <Col span={8}>
         <Card>{<SMButton />}</Card>
       </Col>
     </Row>
-    <Divider orientation='left' />
-    <Row gutter={[32, 32]}>
-      <Col className='gutter-row' span={10}>
-        <ManageInfrastructure />
-      </Col>
-      <Col className='gutter-row' span={10}>
-        <ManageObservation />
+    <Row align={'middle'} style={{ minHeight: 'inherit' }}>
+      <Col span={24}>
+        <Row gutter={[32, 32]}>
+          {cards.map((x, index) => (
+            <Col key={index} span={8}>
+              {HomePageCard(x.title, x.icon)}
+            </Col>
+          ))}
+        </Row>
       </Col>
     </Row>
   </>

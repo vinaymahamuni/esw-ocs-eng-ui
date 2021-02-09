@@ -10,9 +10,9 @@ const Routes = (): JSX.Element => (
     <Route
       path='/'
       render={() => (
-        <CheckLogin error={<LoginError />}>
-          <Home />
-        </CheckLogin>
+        // <CheckLogin error={<LoginError />}>
+        <Home />
+        /* </CheckLogin> */
       )}
     />
   </Switch>

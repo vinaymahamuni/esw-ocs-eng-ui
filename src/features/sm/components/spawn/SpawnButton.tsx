@@ -46,10 +46,10 @@ export const SpawnSMButton = (): JSX.Element => {
     <>
       <Button
         type='primary'
-        size='large'
+        size='middle'
         loading={mutation.isLoading}
         onClick={() => setModalVisible(true)}>
-        Spawn
+        SPAWN
       </Button>
       <Modal
         title='Choose an agent to spawn Sequence Manager'
