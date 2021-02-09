@@ -1,4 +1,4 @@
-import { CheckLogin } from '@tmtsoftware/esw-ts'
+import CheckLogin from './CheckLogin'
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Home from '../containers/home/Home'
@@ -10,9 +10,9 @@ const Routes = (): JSX.Element => (
     <Route
       path='/'
       render={() => (
-        // <CheckLogin error={<LoginError />}>
-        <Home />
-        /* </CheckLogin> */
+        <CheckLogin error={<LoginError />}>
+          <Home />
+        </CheckLogin>
       )}
     />
   </Switch>
