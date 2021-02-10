@@ -44,14 +44,13 @@ export const ShutdownSMButton = (): JSX.Element => {
 
   return (
     <Button
-      type='primary'
-      size='large'
+      danger
       loading={mutation.isLoading}
       onClick={() =>
         agentQuery.data &&
         showConfirm(() => mutation.mutateAsync(agentQuery.data))
       }>
-      SHUTDOWN
+      Shutdown
     </Button>
   )
 }

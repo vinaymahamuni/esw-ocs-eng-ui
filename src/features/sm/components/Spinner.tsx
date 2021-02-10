@@ -1,8 +1,7 @@
+import { Spin } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
 import React from 'react'
 
-export const Spinner = (): JSX.Element => (
-  <LoadingOutlined
-    style={{ fontSize: '25px', color: '#08c', marginLeft: '30px' }}
-  />
-)
+const antIcon = <LoadingOutlined style={{ color: '#08c' }} spin />
+
+export const Spinner = (): JSX.Element => <Spin indicator={antIcon} />

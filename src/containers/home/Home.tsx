@@ -1,7 +1,7 @@
 import { Card, Col, Row, Typography } from 'antd'
 import Icon, { SettingOutlined } from '@ant-design/icons'
 import React from 'react'
-import SMButton from '../../features/sm/components/SMButton'
+import SMCard from '../../features/sm/components/SMCard'
 import styles from './home.module.css'
 import { Link } from 'react-router-dom'
 import TelescopeIcon from '../../assets/images/icons/Telescope.png'
@@ -54,9 +54,7 @@ const cards: CardDetail[] = [
 const Home = (): JSX.Element => (
   <>
     <Row justify={'center'}>
-      <Col span={10}>
-        <Card>{<SMButton />}</Card>
-      </Col>
+      <Col span={8}>{<SMCard />}</Col>
     </Row>
     <Row align={'middle'} className={styles.inheritMinHeight}>
       <Col span={24}>
