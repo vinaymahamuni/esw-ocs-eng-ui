@@ -17,9 +17,12 @@ function showConfirm<T>(
     icon: <ExclamationCircleOutlined />,
     content:
       'Shutting down Sequence Manager may interrupt other ongoing operations.',
-    okText: 'Yes',
-    okType: 'danger',
-    cancelText: 'No',
+    okText: 'Shutdown',
+    okButtonProps: {
+      danger: true,
+      type: 'primary'
+    },
+    cancelText: 'Cancel',
     onOk: () => onYes(),
     onCancel: () => onNo()
   })
