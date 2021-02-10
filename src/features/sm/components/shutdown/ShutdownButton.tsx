@@ -51,7 +51,7 @@ export const ShutdownSMButton = (): JSX.Element => {
         agentQuery.data &&
         showConfirm(() => mutation.mutateAsync(agentQuery.data))
       }>
-      Shutdown
+      SHUTDOWN
     </Button>
   )
 }

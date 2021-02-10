@@ -1,9 +1,8 @@
-import { Card, Col, Typography, Row } from 'antd'
+import { Card, Col, Row, Typography } from 'antd'
 import Icon, { SettingOutlined } from '@ant-design/icons'
 import React from 'react'
 import SMButton from '../../features/sm/components/SMButton'
 import styles from './home.module.css'
-import globalStyles from '../../index.module.css'
 import { Link } from 'react-router-dom'
 import TelescopeIcon from '../../assets/images/icons/Telescope.png'
 import InfraIcon from '../../assets/images/icons/Infrastructure.png'
@@ -13,12 +12,11 @@ type CardDetail = {
   icon: JSX.Element
   link: string
 }
-const HomePageCard = (x: CardDetail) => (
-  <Link to={x.link}>
-    <Card hoverable title={x.icon} className={styles.homePageCards}>
-      <Typography.Title level={5} className={styles.header24Bold}>
-        {x.title}
-      </Typography.Title>
+const HomePageCard = (card: CardDetail) => (
+  <Link to={card.link}>
+    <Card hoverable className={styles.homePageCards}>
+      <Icon component={() => card.icon} />
+      <Typography.Title level={3}>{card.title}</Typography.Title>
     </Card>
   </Link>
 )

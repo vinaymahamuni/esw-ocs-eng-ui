@@ -1,10 +1,10 @@
 import { LogoutOutlined, DownOutlined } from '@ant-design/icons'
-
 import { AuthContext } from '@tmtsoftware/esw-ts'
 import { Button, Modal } from 'antd'
 import React, { useContext, useState, useEffect } from 'react'
 import TMTLogo from '../../assets/images/TMT_Logo.png'
 import styles from './menubar.module.css'
+
 const MenuBar = (): JSX.Element => {
   const { auth, login, logout } = useContext(AuthContext)
   const [username, setUsername] = useState<string | undefined>(undefined)
@@ -25,14 +25,15 @@ const MenuBar = (): JSX.Element => {
       }
     })
   }
+
   const Logout = () => (
-    <Button type='text' onClick={confirmLogout} /*icon={<DownOutlined />}*/>
+    <Button type='default' onClick={confirmLogout}>
       {username?.toUpperCase()}
     </Button>
   )
 
   const Login = () => (
-    <Button type='text' onClick={login} icon={<DownOutlined />}>
+    <Button type='text' onClick={login}>
       Login
     </Button>
   )
