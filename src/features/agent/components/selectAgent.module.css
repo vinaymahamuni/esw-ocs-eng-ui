@@ -1,0 +1,15 @@
+.menuItem {
+  padding-left: 24px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.menuItem:hover {
+  background: #F5F5F5;
+  color: var(--fontColor)
+}
+
+.selectedItem {
+  font-weight: 500;
+  color: var(--fontColor)
+}

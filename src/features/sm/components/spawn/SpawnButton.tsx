@@ -57,9 +57,10 @@ export const SpawnSMButton = (): JSX.Element => {
         centered
         visible={modalVisibility}
         confirmLoading={mutation.isLoading}
+        bodyStyle={{ padding: 0 }}
         onOk={handleModalOk}
         onCancel={handleModalCancel}>
-        <SelectAgent onChange={handleOnChange} />
+        <SelectAgent selectedAgent={agentPrefix} onChange={handleOnChange} />
       </Modal>
     </>
   )
