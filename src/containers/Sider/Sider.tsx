@@ -1,13 +1,11 @@
 import Icon, { SettingOutlined } from '@ant-design/icons'
 import { Layout, Menu } from 'antd'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import styles from '../app/app.module.css'
-import TelescopeIcon from '../../assets/images/icons/Telescope.png'
-import InfraIcon from '../../assets/images/icons/Infrastructure.png'
-import type MenuItem from 'antd/lib/menu/MenuItem'
+import TelescopeIcon from '../../assets/images/icons/Telescope.svg'
+import InfraIcon from '../../assets/images/icons/Infrastructure.svg'
 import { Link } from 'react-router-dom'
 import CheckLogin from '../../routes/CheckLogin'
-import { AuthContext } from '@tmtsoftware/esw-ts'
 
 export const Sider = (): JSX.Element => {
   const [collapsed, setCollapsed] = useState(false)

@@ -4,8 +4,8 @@ import React from 'react'
 import SMCard from '../../features/sm/components/smcard/SMCard'
 import styles from './home.module.css'
 import { Link } from 'react-router-dom'
-import TelescopeIcon from '../../assets/images/icons/Telescope.png'
-import InfraIcon from '../../assets/images/icons/Infrastructure.png'
+import TelescopeIcon from '../../assets/images/icons/Telescope.svg'
+import InfraIcon from '../../assets/images/icons/Infrastructure.svg'
 
 type CardDetail = {
   title: string
