@@ -7,6 +7,9 @@ import { AppConfig } from './config/AppConfig'
 import App from './containers/app/App'
 import './index.module.css'
 import Routes from './routes'
+import { startMocks } from './mocks/mocks'
+
+startMocks()
 
 render(
   <React.StrictMode>
