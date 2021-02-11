@@ -1,7 +1,7 @@
 import { Card, Col, Row, Typography } from 'antd'
 import Icon, { SettingOutlined } from '@ant-design/icons'
 import React from 'react'
-import SMCard from '../../features/sm/components/SMCard'
+import SMCard from '../../features/sm/components/smcard/SMCard'
 import styles from './home.module.css'
 import { Link } from 'react-router-dom'
 import TelescopeIcon from '../../assets/images/icons/Telescope.png'

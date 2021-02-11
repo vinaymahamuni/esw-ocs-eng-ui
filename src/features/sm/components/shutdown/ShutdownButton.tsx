@@ -5,7 +5,7 @@ import React from 'react'
 import { useAgentService } from '../../../agent/hooks/useAgentService'
 import { smComponentId } from '../../constants'
 import { useSMAction } from '../../hooks/useSMAction'
-import { Spinner } from '../Spinner'
+import { Spinner } from '../../../../components/spinners/Spinner'
 
 function showConfirm<T>(
   onYes: () => Promise<T>,

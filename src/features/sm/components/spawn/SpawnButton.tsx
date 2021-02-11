@@ -5,7 +5,7 @@ import { SelectAgent } from '../../../agent/components/SelectAgent'
 import { useAgentService } from '../../../agent/hooks/useAgentService'
 import { obsModeConfig } from '../../constants'
 import { useSMAction } from '../../hooks/useSMAction'
-import { Spinner } from '../Spinner'
+import { Spinner } from '../../../../components/spinners/Spinner'
 
 const spawnSM = (agentPrefix: string) => (agent: AgentService) =>
   agent
