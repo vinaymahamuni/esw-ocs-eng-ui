@@ -9,5 +9,7 @@ body {
   font-style: normal;
   letter-spacing: 0em;
   text-align: left;
-  color: var(--fontColor)
+  color: var(--fontColor);
+  /* hide vertical scroll bar */
+  overflow-y: hidden;
 }

@@ -1,9 +1,13 @@
-import Icon, { SettingOutlined, LeftOutlined } from '@ant-design/icons'
+import Icon, { SettingOutlined } from '@ant-design/icons'
 import { Layout, Menu } from 'antd'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from '../app/app.module.css'
 import TelescopeIcon from '../../assets/images/icons/Telescope.png'
 import InfraIcon from '../../assets/images/icons/Infrastructure.png'
+import type MenuItem from 'antd/lib/menu/MenuItem'
+import { Link } from 'react-router-dom'
+import CheckLogin from '../../routes/CheckLogin'
+import { AuthContext } from '@tmtsoftware/esw-ts'
 
 export const Sider = (): JSX.Element => {
   const [collapsed, setCollapsed] = useState(false)
@@ -40,22 +44,26 @@ export const Sider = (): JSX.Element => {
       link: '/Resources'
     }
   ]
+
   return (
-    <Layout.Sider
-      theme={'light'}
-      collapsible
-      collapsed={collapsed}
-      onCollapse={onCollapse}>
-      <Menu className={styles.sider} defaultSelectedKeys={['0']}>
-        {menuItemLabels.map((item, i) => (
-          <Menu.Item className={styles.menuItem} key={i} icon={item.icon}>
-            {item.title}
-          </Menu.Item>
-        ))}
-      </Menu>
-      {/* <div className={styles.siderButton}>
+    <CheckLogin fallbackComponent={<> </>}>
+      <Layout.Sider
+        style={{ minHeight: '100%' }}
+        theme={'light'}
+        collapsible
+        collapsed={collapsed}
+        onCollapse={onCollapse}>
+        <Menu className={styles.sider} defaultSelectedKeys={['0']}>
+          {menuItemLabels.map((item, i) => (
+            <Menu.Item className={styles.menuItem} key={i} icon={item.icon}>
+              <Link to={item.link}> {item.title}</Link>
+            </Menu.Item>
+          ))}
+        </Menu>
+        {/* <div className={styles.siderButton}>
         <LeftOutlined />
       </div> */}
-    </Layout.Sider>
+      </Layout.Sider>
+    </CheckLogin>
   )
 }
