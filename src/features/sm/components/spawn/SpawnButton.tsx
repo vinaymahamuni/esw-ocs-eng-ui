@@ -21,16 +21,16 @@ export const SpawnSMButton = (): JSX.Element => {
 
   const agentServiceQuery = useAgentService()
 
-  const mutation = useSMAction(
+  const spawnSmAction = useSMAction(
     spawnSM(agentPrefix),
     'Successfully spawned Sequence Manager',
     'Failed to spawn Sequence Manager'
   )
 
-  const handleModalOk = async () => {
+  const handleModalOk = () => {
     if (agentPrefix && agentPrefix !== '') {
       agentServiceQuery.data &&
-        (await mutation.mutateAsync(agentServiceQuery.data))
+        spawnSmAction.mutateAsync(agentServiceQuery.data)
       setModalVisibility(false)
     } else {
       message.error(`Please select agent!`)
@@ -38,7 +38,7 @@ export const SpawnSMButton = (): JSX.Element => {
   }
 
   const handleModalCancel = () => setModalVisibility(false)
-  const handleOnChange = (value: string) => setAgentPrefix(value)
+  const handleModalAgentSelection = (value: string) => setAgentPrefix(value)
 
   if (agentServiceQuery.isLoading) return <Spinner />
 
@@ -47,7 +47,7 @@ export const SpawnSMButton = (): JSX.Element => {
       <Button
         type='primary'
         size='middle'
-        loading={mutation.isLoading}
+        loading={spawnSmAction.isLoading}
         onClick={() => setModalVisibility(true)}>
         Spawn
       </Button>
@@ -56,11 +56,14 @@ export const SpawnSMButton = (): JSX.Element => {
         okText='Spawn'
         centered
         visible={modalVisibility}
-        confirmLoading={mutation.isLoading}
+        confirmLoading={spawnSmAction.isLoading}
         bodyStyle={{ padding: 0 }}
         onOk={handleModalOk}
         onCancel={handleModalCancel}>
-        <SelectAgent selectedAgent={agentPrefix} onChange={handleOnChange} />
+        <SelectAgent
+          selectedAgent={agentPrefix}
+          onChange={handleModalAgentSelection}
+        />
       </Modal>
     </>
   )

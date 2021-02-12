@@ -7,28 +7,22 @@ import { smComponentId } from '../../constants'
 import { useSMAction } from '../../hooks/useSMAction'
 import { Spinner } from '../../../../components/spinners/Spinner'
 
-function showConfirm<T>(
-  onYes: () => Promise<T>,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onNo: () => void = () => {}
-): void {
+function showConfirmModal<T>(onYes: () => Promise<T>): void {
   Modal.confirm({
     title: 'Do you want to shutdown Sequence Manager?',
     icon: <ExclamationCircleOutlined />,
-    content:
-      'Shutting down Sequence Manager may interrupt other ongoing operations.',
+    centered: true,
     okText: 'Shutdown',
     okButtonProps: {
       danger: true,
       type: 'primary'
     },
     cancelText: 'Cancel',
-    onOk: () => onYes(),
-    onCancel: () => onNo()
+    onOk: () => onYes()
   })
 }
 
-const killSM = (agent: AgentService) =>
+const shutdownSM = (agent: AgentService) =>
   agent.killComponent(smComponentId).then((res) => {
     if (res._type === 'Failed') throw new Error(res.msg)
     return res
@@ -37,8 +31,8 @@ const killSM = (agent: AgentService) =>
 export const ShutdownSMButton = (): JSX.Element => {
   const agentQuery = useAgentService()
 
-  const mutation = useSMAction(
-    killSM,
+  const shutdownSmAction = useSMAction(
+    shutdownSM,
     'Successfully shutdown Sequence Manager',
     'Failed to shutdown Sequence Manager'
   )
@@ -48,10 +42,10 @@ export const ShutdownSMButton = (): JSX.Element => {
   return (
     <Button
       danger
-      loading={mutation.isLoading}
+      loading={shutdownSmAction.isLoading}
       onClick={() =>
         agentQuery.data &&
-        showConfirm(() => mutation.mutateAsync(agentQuery.data))
+        showConfirmModal(() => shutdownSmAction.mutateAsync(agentQuery.data))
       }>
       Shutdown
     </Button>
