@@ -16,14 +16,14 @@ The latest stable version of [Node.js](https://nodejs.org/en/download/package-ma
 
 Run following commands in the terminal.
 
-   ```bash
-   npm install
-   npm start
-   ```
+  ```bash
+    npm install
+    npm start
+  ```
 
 Then, open [localhost:8080](http://localhost:8080) in a browser
 
-###Required backend services/components
+### Required backend services/components
 * Location Service
 * Auth Service - user with esw-user role is required
 * Agent Service

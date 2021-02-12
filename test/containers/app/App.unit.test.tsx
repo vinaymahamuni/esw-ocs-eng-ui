@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  prettyDOM,
-  renderWithAuth,
-  screen,
-  cleanup
-} from '../../utils/test-utils'
+import { renderWithAuth, screen, cleanup } from '../../utils/test-utils'
 import { expect } from 'chai'
 import App from '../../../src/containers/app/App' // fixed to absolute path
 import { BrowserRouter } from 'react-router-dom'
