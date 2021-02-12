@@ -8,7 +8,8 @@
     "src": "/_dist_",
     "test": "/dist_test"
   },
-  "plugins": [
-    ["@snowpack/plugin-typescript"]
-  ]
+  "plugins": [["@snowpack/plugin-typescript"]],
+  "packageOptions": {
+    "polyfillNode": true
+  }
 }

@@ -1,13 +1,19 @@
 import React, { ReactElement } from 'react'
-import {
-  KeycloakPromise,
+import type {
   KeycloakProfile,
-  KeycloakTokenParsed,
+  KeycloakPromise,
+  KeycloakResourceAccess,
   KeycloakRoles,
-  KeycloakResourceAccess
+  KeycloakTokenParsed
 } from 'keycloak-js'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
-import { AuthContext } from '@tmtsoftware/esw-ts'
+import { AgentService, AuthContext } from '@tmtsoftware/esw-ts'
+import {
+  ServiceFactoryContext,
+  ServiceFactoryContextType
+} from '../../src/contexts/serviceFactoryContext/ServiceFactoryContext'
+import { instance, mock } from 'ts-mockito'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 const getMockAuth = (loggedIn: boolean) => {
   return {
@@ -26,35 +32,87 @@ const getMockAuth = (loggedIn: boolean) => {
   }
 }
 
-const getContextProvider = (loggedIn: boolean) => {
+type Services = { agentService: AgentService }
+
+type MockServices = {
+  serviceFactoryContext: ServiceFactoryContextType
+  instance: Services
+  mock: Services
+}
+
+const getMockServices: () => MockServices = () => {
+  const mockAgentService = mock<AgentService>(AgentService)
+  const agentServiceInstance = instance<AgentService>(mockAgentService)
+  const serviceFactoryContext: ServiceFactoryContextType = {
+    agentServiceFactory: () => Promise.resolve(agentServiceInstance)
+  }
+
+  return {
+    serviceFactoryContext,
+    mock: {
+      agentService: mockAgentService
+    },
+    instance: {
+      agentService: agentServiceInstance
+    }
+  }
+}
+
+const getContextProvider = (
+  loggedIn: boolean,
+  mockClients: ServiceFactoryContextType
+) => {
   const auth = getMockAuth(loggedIn)
-  const AllTheProviders = ({ children }: { children: React.ReactNode }) => (
+
+  const contextProvider = ({ children }: { children: React.ReactNode }) => (
     <AuthContext.Provider
       value={{
         auth: auth,
         login: () => ({}),
         logout: () => ({})
       }}>
-      {children}
+      <ServiceFactoryContext.Provider value={mockClients}>
+        {children}
+      </ServiceFactoryContext.Provider>
     </AuthContext.Provider>
   )
 
-  return AllTheProviders
+  return contextProvider
+}
+
+const getContextAndQueryClientProvider = (
+  loggedIn: boolean,
+  mockClients: ServiceFactoryContextType = getMockServices()
+    .serviceFactoryContext
+) => {
+  const queryClient = new QueryClient()
+  const ContextProvider = getContextProvider(loggedIn, mockClients)
+
+  const provider = ({ children }: { children: React.ReactNode }) => (
+    <ContextProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </ContextProvider>
+  )
+  return provider
 }
 
 const renderWithAuth = (
   ui: ReactElement,
   loggedIn = true,
+  mockClients: ServiceFactoryContextType = getMockServices()
+    .serviceFactoryContext,
   options?: Omit<RenderOptions, 'queries'>
 ): RenderResult => {
   return render(ui, {
-    wrapper: getContextProvider(loggedIn) as React.FunctionComponent<
-      Record<string, unknown>
-    >,
+    wrapper: getContextProvider(
+      loggedIn,
+      mockClients
+    ) as React.FunctionComponent<Record<string, unknown>>,
     ...options
   })
 }
 // eslint-disable-next-line import/export
 export * from '@testing-library/react'
 // eslint-disable-next-line import/export
-export { renderWithAuth }
+export { renderWithAuth, getMockServices, getContextAndQueryClientProvider }
+export type { MockServices }

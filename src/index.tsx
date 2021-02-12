@@ -7,15 +7,21 @@ import { AppConfig } from './config/AppConfig'
 import App from './containers/app/App'
 import './index.module.css'
 import Routes from './routes'
+import {
+  ServiceFactoryContext,
+  serviceFactoryContextState
+} from './contexts/serviceFactoryContext/ServiceFactoryContext'
 
 render(
   <React.StrictMode>
     <Router>
       <AuthContextProvider config={AppConfig}>
-        <App>
-          <GlobalSpinner />
-          <Routes />
-        </App>
+        <ServiceFactoryContext.Provider value={serviceFactoryContextState}>
+          <App>
+            <GlobalSpinner />
+            <Routes />
+          </App>
+        </ServiceFactoryContext.Provider>
       </AuthContextProvider>
     </Router>
   </React.StrictMode>,
