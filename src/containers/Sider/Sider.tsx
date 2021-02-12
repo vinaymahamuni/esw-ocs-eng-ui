@@ -1,15 +1,17 @@
-import Icon, { SettingOutlined } from '@ant-design/icons'
-import { Layout, Menu } from 'antd'
+import Icon from '@ant-design/icons'
+import { Layout, Menu, Typography } from 'antd'
 import React, { useState } from 'react'
-import styles from '../app/app.module.css'
+import styles from './sider.module.css'
 import TelescopeIcon from '../../assets/images/icons/Telescope.svg'
 import InfraIcon from '../../assets/images/icons/Infrastructure.svg'
-import { Link } from 'react-router-dom'
+import SettingsIcon from '../../assets/images/icons/Settings.svg'
+import { Link, useLocation } from 'react-router-dom'
 import CheckLogin from '../../routes/CheckLogin'
 
 export const Sider = (): JSX.Element => {
   const [collapsed, setCollapsed] = useState(false)
-
+  const [selectedKeys, setSelectedKeys] = useState([])
+  const location = useLocation()
   const onCollapse = () => {
     setCollapsed(!collapsed)
   }
@@ -38,23 +40,29 @@ export const Sider = (): JSX.Element => {
     },
     {
       title: 'Resources',
-      icon: <SettingOutlined className={styles.menuIconSize} />,
+      icon: (
+        <Icon
+          component={() => (
+            <img src={SettingsIcon} className={styles.menuIconSize} />
+          )}
+        />
+      ),
       link: '/Resources'
     }
   ]
-
+  if (location.search.match('/')) setSelectedKeys([])
   return (
     <CheckLogin fallbackComponent={<> </>}>
       <Layout.Sider
-        style={{ minHeight: '100%' }}
+        className={styles.sider}
         theme={'light'}
         collapsible
         collapsed={collapsed}
         onCollapse={onCollapse}>
-        <Menu className={styles.sider} defaultSelectedKeys={['0']}>
+        <Menu selectedKeys={selectedKeys}>
           {menuItemLabels.map((item, i) => (
-            <Menu.Item className={styles.menuItem} key={i} icon={item.icon}>
-              <Link to={item.link}> {item.title}</Link>
+            <Menu.Item key={i} icon={item.icon}>
+              <Link to={item.link}>{item.title}</Link>
             </Menu.Item>
           ))}
         </Menu>

@@ -1,0 +1,12 @@
+
+.sider {
+  width: fit-content !important;
+  max-width: fit-content !important;
+  min-height: 100%;
+}
+
+.menuIconSize {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}

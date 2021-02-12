@@ -8,6 +8,7 @@ const LoginError = () => <div>User not logged in!!!</div>
 const Routes = (): JSX.Element => (
   <Switch>
     <Route
+      exact
       path='/'
       render={() => (
         <CheckLogin fallbackComponent={<LoginError />}>

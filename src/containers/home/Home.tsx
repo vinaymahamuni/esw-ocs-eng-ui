@@ -1,11 +1,12 @@
 import { Card, Col, Row, Typography } from 'antd'
-import Icon, { SettingOutlined } from '@ant-design/icons'
+import Icon from '@ant-design/icons'
 import React from 'react'
 import SMCard from '../../features/sm/components/smcard/SMCard'
 import styles from './home.module.css'
 import { Link } from 'react-router-dom'
 import TelescopeIcon from '../../assets/images/icons/Telescope.svg'
 import InfraIcon from '../../assets/images/icons/Infrastructure.svg'
+import SettingsIcon from '../../assets/images/icons/Settings.svg'
 
 type CardDetail = {
   title: string
@@ -46,7 +47,13 @@ const cards: CardDetail[] = [
   },
   {
     title: 'Resources',
-    icon: <SettingOutlined className={styles.settingsIcon} />,
+    icon: (
+      <Icon
+        component={() => (
+          <img src={SettingsIcon} className={styles.commonIconSize} />
+        )}
+      />
+    ),
     link: '/Resources'
   }
 ]

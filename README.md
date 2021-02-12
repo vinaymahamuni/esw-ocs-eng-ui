@@ -1,12 +1,18 @@
-# esw-ocs-eng-ui
+# ESW-OCS-ENG-UI
 
-This project is a sample React web application.
+This project is a React web application.
 
-## Prerequisites Required for Running App
+## Prerequisites Required for Running OCS-UI Application
 
-The latest version of [Node.js](https://nodejs.org/en/download/package-manager/) must be installed.
+1. csw-services are required to be up & running.
+   using sbt shell inside csw `csw-services/run start -k -c`
 
-## Run the App in Local Environment
+2. `AgentService`, along with one or more `Agent's` are required to be up & running.
+   using sbt shell inside esw `esw-services/run start -agent --agent-service`
+
+The latest stable version of [Node.js](https://nodejs.org/en/download/package-manager/) must be installed.
+
+## Run the Application in Local Environment
 
 Run following commands in the terminal.
 
@@ -47,16 +53,18 @@ The project has following structure:
 ├── src
 │   ├── assets
 │   ├── components
+|   ├── containers
 │   ├── config
-│   ├── helpers
+│   ├── features
+│   ├── routes
 ├── test
 ├── types
 ```
 
 * `assets`: This directory contains all the files (images, audio etc) that are used by the UI component.
-* `components`: This directory contains all the components created for this UI application.
+* `components`: App reusable functions / components created for this UI application.
 * `config`: This contains the application specific configurations.
-* `helpers`: App reusable functions / utilities goes here.
+* `containers`: App reusable functions / utilities goes here.
 * `test`: This directory contains all the tests for the UI application.
 * `types`: This directory contains all the types that needs to be imported externally for UI application.
 

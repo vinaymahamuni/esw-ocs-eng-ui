@@ -1,8 +1,8 @@
-import { LogoutOutlined, DownOutlined } from '@ant-design/icons'
+import { LogoutOutlined } from '@ant-design/icons'
 import { AuthContext } from '@tmtsoftware/esw-ts'
-import { Button, Modal } from 'antd'
+import { Avatar, Button, Modal } from 'antd'
 import React, { useContext, useState, useEffect } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import TMTLogo from '../../assets/images/TMT_Logo.png'
 import styles from './menubar.module.css'
 
@@ -31,9 +31,12 @@ const MenuBar = (): JSX.Element => {
   }
 
   const Logout = () => (
-    <Button type='default' onClick={confirmLogout}>
-      {username?.toUpperCase()}
-    </Button>
+    <>
+      <Avatar size={'small'}>{username?.charAt(0).toUpperCase()}</Avatar>
+      <Button type='text' onClick={confirmLogout}>
+        {username?.toUpperCase()}
+      </Button>
+    </>
   )
 
   const Login = () => (
