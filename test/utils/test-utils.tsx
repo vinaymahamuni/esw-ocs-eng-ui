@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import {
+import type {
   KeycloakPromise,
   KeycloakProfile,
   KeycloakTokenParsed,

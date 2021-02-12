@@ -16,7 +16,7 @@
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
-    "test:unit": "web-test-runner 'test/**/*.unit.test.{ts,tsx}'",
+    "test:unit": "jest unit --reporters=default ",
     "test": "npm-run-all test:unit",
     "clean": "rm -rf dist && mkdir dist",
     "prebuild": "npm-run-all --parallel clean fix audit",
@@ -30,17 +30,14 @@
   ],
   "devDependencies": {
     "@snowpack/plugin-typescript": "^1.2.1",
-    "@snowpack/web-test-runner-plugin": "^0.2.1",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.3",
-    "@types/chai": "^4.2.14",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.13.0",
     "@web/test-runner": "^0.12.3",
-    "chai": "^4.2.0",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-import-resolver-typescript": "^2.3.0",
@@ -48,10 +45,12 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "^26.6.3",
     "keycloak-js": "^12.0.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
     "snowpack": "^3.0.11",
+    "ts-jest": "^26.5.1",
     "typescript": "^4.1.3"
   }
 }

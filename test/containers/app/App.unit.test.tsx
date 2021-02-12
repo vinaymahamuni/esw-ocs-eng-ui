@@ -1,11 +1,9 @@
 import React from 'react'
 import {
-  prettyDOM,
   renderWithAuth,
   screen,
   cleanup
 } from '../../utils/test-utils'
-import { expect } from 'chai'
 import App from '../../../src/containers/app/App' // fixed to absolute path
 import { BrowserRouter } from 'react-router-dom'
 import Routes from '../../../src/routes'
@@ -15,7 +13,7 @@ describe('App page', () => {
     cleanup()
   })
 
-  it('should render app with layout when user is logged in', async () => {
+  test('should render app with layout when user is logged in', async () => {
     renderWithAuth(
       <BrowserRouter>
         <App>
@@ -29,13 +27,13 @@ describe('App page', () => {
     const manageInfra = screen.queryAllByText('Manage Infrastructure')
     const logoutButton = await screen.findByText('ESW-USER')
 
-    expect(resources).to.have.lengthOf(2)
-    expect(manageObservations).to.have.lengthOf(2)
-    expect(manageInfra).to.have.lengthOf(2)
-    expect(logoutButton).to.exist
+    expect(resources).toHaveLength(2)
+    expect(manageObservations).toHaveLength(2)
+    expect(manageInfra).toHaveLength(2)
+    expect(logoutButton).toBeDefined()
   })
 
-  it('should render app without layout when user is not logged in', () => {
+  test('should render app without layout when user is not logged in', () => {
     renderWithAuth(
       <BrowserRouter>
         <App>
@@ -46,6 +44,6 @@ describe('App page', () => {
     )
 
     const loginButton = screen.queryAllByText('Login')
-    expect(loginButton).to.have.lengthOf(1)
+    expect(loginButton).toBeDefined()
   })
 })
