@@ -1,17 +1,15 @@
-import React, { useCallback, useState } from 'react'
 import { expect } from 'chai'
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 import { useAgentService } from '../../../../src/features/agent/hooks/useAgentService'
-import { renderHook, act } from '@testing-library/react-hooks/dom'
+import { renderHook } from '@testing-library/react-hooks/dom'
 import {
-  getContextAndQueryClientProvider,
+  getContextWithQueryClientProvider,
   getMockServices
 } from '../../../utils/test-utils'
 
 describe('useAgentService', () => {
-  it('should render some element', async () => {
+  it('should return agent service instance | ESW-441', async () => {
     const mockServices = getMockServices()
-    const ContextAndQueryClientProvider = getContextAndQueryClientProvider(
+    const ContextAndQueryClientProvider = getContextWithQueryClientProvider(
       true,
       mockServices.serviceFactoryContext
     )

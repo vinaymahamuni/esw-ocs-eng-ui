@@ -1,9 +1,14 @@
+import { useContext } from 'react'
 import type { Option } from '@tmtsoftware/esw-ts'
 import { useQuery, UseQueryResult } from 'react-query'
-import { locationService } from '../../location/instance'
 import { smConnection } from '../constants'
+import { ServiceFactoryContext } from '../../../contexts/serviceFactoryContext/ServiceFactoryContext'
 
 export const smStatusKey = 'smStatus'
 
-export const useSMStatus = (): UseQueryResult<Option<Location>, unknown> =>
-  useQuery(smStatusKey, () => locationService.find(smConnection))
+export const useSMStatus = (): UseQueryResult<Option<Location>, unknown> => {
+  const { locationServiceFactory } = useContext(ServiceFactoryContext)
+  return useQuery(smStatusKey, () =>
+    locationServiceFactory().find(smConnection)
+  )
+}

@@ -7,13 +7,15 @@ import type {
   KeycloakTokenParsed
 } from 'keycloak-js'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
-import { AgentService, AuthContext } from '@tmtsoftware/esw-ts'
+import { AgentService, AuthContext, LocationService } from '@tmtsoftware/esw-ts'
 import {
   ServiceFactoryContext,
   ServiceFactoryContextType
 } from '../../src/contexts/serviceFactoryContext/ServiceFactoryContext'
 import { instance, mock } from 'ts-mockito'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { AgentServiceImpl } from '@tmtsoftware/esw-ts/dist/src/clients/agent-service/AgentServiceImpl'
+import { LocationServiceImpl } from '@tmtsoftware/esw-ts/dist/src/clients/location/LocationServiceImpl'
 
 const getMockAuth = (loggedIn: boolean) => {
   return {
@@ -32,7 +34,10 @@ const getMockAuth = (loggedIn: boolean) => {
   }
 }
 
-type Services = { agentService: AgentService }
+type Services = {
+  agentService: AgentService
+  locationService: LocationService
+}
 
 type MockServices = {
   serviceFactoryContext: ServiceFactoryContextType
@@ -41,19 +46,24 @@ type MockServices = {
 }
 
 const getMockServices: () => MockServices = () => {
-  const mockAgentService = mock<AgentService>(AgentService)
-  const agentServiceInstance = instance<AgentService>(mockAgentService)
+  const agentServiceMock = mock(AgentServiceImpl)
+  const agentServiceInstance = instance<AgentService>(agentServiceMock)
+  const locationServiceMock = mock(LocationServiceImpl)
+  const locationServiceInstance = instance<LocationService>(locationServiceMock)
   const serviceFactoryContext: ServiceFactoryContextType = {
-    agentServiceFactory: () => Promise.resolve(agentServiceInstance)
+    agentServiceFactory: () => Promise.resolve(agentServiceInstance),
+    locationServiceFactory: () => locationServiceInstance
   }
 
   return {
     serviceFactoryContext,
     mock: {
-      agentService: mockAgentService
+      agentService: agentServiceMock,
+      locationService: locationServiceMock
     },
     instance: {
-      agentService: agentServiceInstance
+      agentService: agentServiceInstance,
+      locationService: locationServiceInstance
     }
   }
 }
@@ -80,10 +90,9 @@ const getContextProvider = (
   return contextProvider
 }
 
-const getContextAndQueryClientProvider = (
+const getContextWithQueryClientProvider = (
   loggedIn: boolean,
-  mockClients: ServiceFactoryContextType = getMockServices()
-    .serviceFactoryContext
+  mockClients: ServiceFactoryContextType
 ) => {
   const queryClient = new QueryClient()
   const ContextProvider = getContextProvider(loggedIn, mockClients)
@@ -104,7 +113,7 @@ const renderWithAuth = (
   options?: Omit<RenderOptions, 'queries'>
 ): RenderResult => {
   return render(ui, {
-    wrapper: getContextProvider(
+    wrapper: getContextWithQueryClientProvider(
       loggedIn,
       mockClients
     ) as React.FunctionComponent<Record<string, unknown>>,
@@ -114,5 +123,5 @@ const renderWithAuth = (
 // eslint-disable-next-line import/export
 export * from '@testing-library/react'
 // eslint-disable-next-line import/export
-export { renderWithAuth, getMockServices, getContextAndQueryClientProvider }
+export { renderWithAuth, getMockServices, getContextWithQueryClientProvider }
 export type { MockServices }
