@@ -1,11 +1,12 @@
 import { AgentService, Prefix } from '@tmtsoftware/esw-ts'
-import { Button, message, Modal } from 'antd'
+import { Button, message } from 'antd'
 import React, { useState } from 'react'
-import { SelectAgent } from '../../../agent/components/SelectAgent'
 import { useAgentService } from '../../../agent/hooks/useAgentService'
 import { obsModeConfig } from '../../constants'
 import { useSMAction } from '../../hooks/useSMAction'
 import { Spinner } from '../../../../components/spinners/Spinner'
+import { SelectionModal } from '../../../../components/Modal/SelectionModal'
+import { useAgents } from '../../../agent/hooks/useAgents'
 
 const spawnSM = (agentPrefix: string) => (agent: AgentService) =>
   agent
@@ -19,6 +20,7 @@ export const SpawnSMButton = (): JSX.Element => {
   const [modalVisibility, setModalVisibility] = useState(false)
   const [agentPrefix, setAgentPrefix] = useState('')
 
+  const allAgentsQuery = useAgents()
   const agentServiceQuery = useAgentService()
 
   const spawnSmAction = useSMAction(
@@ -51,20 +53,17 @@ export const SpawnSMButton = (): JSX.Element => {
         onClick={() => setModalVisibility(true)}>
         Spawn
       </Button>
-      <Modal
+      <SelectionModal
         title='Choose an agent to spawn Sequence Manager'
         okText='Spawn'
-        centered
         visible={modalVisibility}
         confirmLoading={spawnSmAction.isLoading}
-        bodyStyle={{ padding: 0 }}
         onOk={handleModalOk}
-        onCancel={handleModalCancel}>
-        <SelectAgent
-          selectedAgent={agentPrefix}
-          onChange={handleModalAgentSelection}
-        />
-      </Modal>
+        onCancel={handleModalCancel}
+        data={allAgentsQuery.data?.map((prefix) => prefix.toJSON())}
+        selectedItem={agentPrefix}
+        onChange={handleModalAgentSelection}
+      />
     </>
   )
 }
