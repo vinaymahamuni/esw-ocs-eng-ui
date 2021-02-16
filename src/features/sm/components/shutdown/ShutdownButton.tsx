@@ -17,6 +17,8 @@ function showConfirmModal<T>(onYes: () => Promise<T>): void {
       danger: true,
       type: 'primary'
     },
+    closable: true,
+    maskClosable: true,
     cancelText: 'Cancel',
     onOk: () => onYes()
   })
