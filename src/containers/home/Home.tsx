@@ -61,7 +61,7 @@ const cards: CardDetail[] = [
 const Home = (): JSX.Element => (
   <>
     <Row justify={'center'}>
-      <Col span={8}>{<SMCard />}</Col>
+      <Col>{<SMCard />}</Col>
     </Row>
     <Row align={'middle'} className={styles.inheritMinHeight}>
       <Col span={24}>
