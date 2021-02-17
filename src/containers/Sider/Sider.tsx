@@ -1,5 +1,5 @@
 import Icon from '@ant-design/icons'
-import { Layout, Menu, Typography } from 'antd'
+import { Layout, Menu } from 'antd'
 import React, { useState } from 'react'
 import styles from './sider.module.css'
 import TelescopeIcon from '../../assets/images/icons/Telescope.svg'

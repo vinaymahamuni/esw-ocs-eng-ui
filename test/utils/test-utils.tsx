@@ -7,17 +7,12 @@ import type {
   KeycloakTokenParsed
 } from 'keycloak-js'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
-import {
-  AgentService,
-  AuthContext,
-  Location,
-  LocationService
-} from '@tmtsoftware/esw-ts'
+import { AgentService, AuthContext, LocationService } from '@tmtsoftware/esw-ts'
 import {
   ServiceFactoryContext,
   ServiceFactoryContextType
 } from '../../src/contexts/serviceFactoryContext/ServiceFactoryContext'
-import { instance, mock, when } from 'ts-mockito'
+import { instance, mock } from 'ts-mockito'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { AgentServiceImpl } from '@tmtsoftware/esw-ts/dist/src/clients/agent-service/AgentServiceImpl'
 import { LocationServiceImpl } from '@tmtsoftware/esw-ts/dist/src/clients/location/LocationServiceImpl'
@@ -108,7 +103,7 @@ const getContextWithQueryClientProvider = (
   mockClients: ServiceFactoryContextType,
   loginFunc: () => void,
   logoutFunc: () => void
-) => {
+): React.FC<{ children: React.ReactNode }> => {
   const queryClient = new QueryClient()
   const ContextProvider = getContextProvider(
     loggedIn,

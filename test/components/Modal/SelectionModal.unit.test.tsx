@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, render, within } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import { expect } from 'chai'
 import { SelectionModal } from '../../../src/components/Modal/SelectionModal'
 

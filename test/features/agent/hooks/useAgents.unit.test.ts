@@ -6,12 +6,7 @@ import {
 } from '../../../utils/test-utils'
 import { verify, when } from 'ts-mockito'
 import { useAgents } from '../../../../src/features/agent/hooks/useAgents'
-import {
-  HttpConnection,
-  HttpLocation,
-  Prefix,
-  Location
-} from '@tmtsoftware/esw-ts'
+import { HttpConnection, HttpLocation, Prefix } from '@tmtsoftware/esw-ts'
 
 describe('useAgents', () => {
   it('should return list of agents up and running | ESW-441', async () => {
