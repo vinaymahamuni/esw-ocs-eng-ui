@@ -37,7 +37,8 @@ describe('useAgents', () => {
     })
 
     verify(locationService.listByComponentType('Machine')).called()
-    // @ts-ignore
-    expect(result.current.data[0]).to.eq(agentPrefix)
+
+    const prefix = result.current.data ? result.current.data[0] : undefined
+    expect(prefix).to.eq(agentPrefix)
   })
 })
