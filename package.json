@@ -41,7 +41,7 @@
     "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.13.0",
-    "@web/test-runner": "^0.12.3",
+    "@web/test-runner": "^0.12.5",
     "chai": "^4.2.0",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.1.0",

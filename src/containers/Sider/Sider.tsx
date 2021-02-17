@@ -18,6 +18,7 @@ export const Sider = (): JSX.Element => {
   const menuItemLabels = [
     {
       title: 'Manage Infrastructure',
+      role: 'ManageInfrastructure',
       icon: (
         <Icon
           component={() => (
@@ -29,6 +30,7 @@ export const Sider = (): JSX.Element => {
     },
     {
       title: 'Manage Observations',
+      role: 'ManageObservations',
       icon: (
         <Icon
           component={() => (
@@ -40,6 +42,7 @@ export const Sider = (): JSX.Element => {
     },
     {
       title: 'Resources',
+      role: 'Resources',
       icon: (
         <Icon
           component={() => (
@@ -62,7 +65,9 @@ export const Sider = (): JSX.Element => {
         <Menu selectedKeys={selectedKeys}>
           {menuItemLabels.map((item, i) => (
             <Menu.Item key={i} icon={item.icon}>
-              <Link to={item.link}>{item.title}</Link>
+              <Link role={item.role} to={item.link}>
+                {item.title}
+              </Link>
             </Menu.Item>
           ))}
         </Menu>

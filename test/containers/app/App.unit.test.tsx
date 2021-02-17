@@ -24,9 +24,9 @@ describe('App page', () => {
     const manageInfra = screen.queryAllByText('Manage Infrastructure')
     const logoutButton = await screen.findByText('ESW-USER')
 
-    expect(resources).to.have.lengthOf(2)
-    expect(manageObservations).to.have.lengthOf(2)
-    expect(manageInfra).to.have.lengthOf(2)
+    expect(resources).to.have.length(2)
+    expect(manageObservations).to.have.length(2)
+    expect(manageInfra).to.have.length(2)
     expect(logoutButton).to.exist
   })
 
@@ -40,7 +40,7 @@ describe('App page', () => {
       false
     )
 
-    const loginButton = screen.queryAllByText('Login')
-    expect(loginButton).to.have.lengthOf(1)
+    const loginButton = screen.queryByText('Login')
+    expect(loginButton).to.exist
   })
 })

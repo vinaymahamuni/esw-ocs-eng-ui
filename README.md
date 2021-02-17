@@ -24,6 +24,7 @@ Run following commands in the terminal.
 Then, open [localhost:8080](http://localhost:8080) in a browser
 
 ### Required backend services/components
+
 * Location Service
 * Auth Service - user with esw-user role is required
 * Agent Service
