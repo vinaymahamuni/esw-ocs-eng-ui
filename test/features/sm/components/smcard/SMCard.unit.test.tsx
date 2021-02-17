@@ -22,7 +22,9 @@ describe('SMCard', () => {
     await waitFor(
       () => expect(queryByRole('button', { name: /shutdown/i })).to.null
     )
-    await waitFor(() => expect(getByRole('button', { name: /spawn/i })).exist)
+    await waitFor(
+      () => expect(getByRole('button', { name: /spawn/i })).to.exist
+    )
     verify(locationServiceMock.find(smConnection)).called()
   })
 
@@ -47,7 +49,7 @@ describe('SMCard', () => {
       () => expect(queryByRole('button', { name: /spawn/i })).to.null
     )
     await waitFor(
-      () => expect(getByRole('button', { name: /shutdown/i })).exist
+      () => expect(getByRole('button', { name: /shutdown/i })).to.exist
     )
     verify(locationServiceMock.find(smConnection)).called()
   })

@@ -27,7 +27,7 @@ describe('ShutdownSMButton', () => {
     fireEvent.click(shutdownButton)
 
     //modal will appear with shutdown button
-    await waitFor(() => expect(getByRole('document')).exist)
+    await waitFor(() => expect(getByRole('document')).to.exist)
     const modalDocument = screen.getByRole('document')
     const modalShutdownButton = within(modalDocument).getByRole('button', {
       name: /shutdown/i

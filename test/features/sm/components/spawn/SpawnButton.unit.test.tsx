@@ -41,7 +41,7 @@ describe('SpawnSMButton', () => {
     //modal will appear with spawn button
     await waitFor(
       () =>
-        expect(getByText(/choose an agent to spawn sequence manager/i)).exist
+        expect(getByText(/choose an agent to spawn sequence manager/i)).to.exist
     )
     const modalDocument = screen.getByRole('document')
     const modalSpawnButton = within(modalDocument).getByRole('button', {
@@ -50,7 +50,7 @@ describe('SpawnSMButton', () => {
 
     //User don't select agent machine and try to spawn SM
     fireEvent.click(modalSpawnButton)
-    expect(getByText('Please select agent!')).exist
+    expect(getByText('Please select agent!')).to.exist
 
     //User selects agent machine
     fireEvent.click(
@@ -63,7 +63,7 @@ describe('SpawnSMButton', () => {
     fireEvent.click(modalSpawnButton)
 
     await waitFor(() => {
-      expect(getByText('Successfully spawned Sequence Manager')).exist
+      expect(getByText('Successfully spawned Sequence Manager')).to.exist
     })
 
     const [prefix, expectedConfig, isLocal] = capture(
