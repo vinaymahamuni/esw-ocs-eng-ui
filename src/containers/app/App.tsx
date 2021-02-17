@@ -3,13 +3,13 @@ import 'antd/dist/antd.css'
 import React from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import MenuBar from '../../components/MenuBar/MenuBar'
+import HeaderBar from '../../components/HeaderBar/HeaderBar'
 import { Sider } from '../Sider/Sider'
 import Container from './Container'
 import styles from './app.module.css'
 import CheckLogin from '../../routes/CheckLogin'
 
-const { Header, Content } = Layout
+const { Header } = Layout
 
 const queryClient = new QueryClient()
 
@@ -22,7 +22,7 @@ const App = ({ children }: AppProps): JSX.Element => {
     <QueryClientProvider client={queryClient}>
       <Layout>
         <Header className={styles.tmtHeader}>
-          <MenuBar />
+          <HeaderBar />
         </Header>
         <Container>{children}</Container>
       </Layout>

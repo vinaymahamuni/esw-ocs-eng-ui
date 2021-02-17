@@ -1,18 +1,18 @@
+import React, { useContext, useState, useEffect } from 'react'
 import { LogoutOutlined } from '@ant-design/icons'
 import { AuthContext } from '@tmtsoftware/esw-ts'
 import { Avatar, Button, Modal } from 'antd'
-import React, { useContext, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import TMTLogo from '../../assets/images/TMT_Logo.png'
-import styles from './menubar.module.css'
+import styles from './headerBar.module.css'
 
-const MenuBar = (): JSX.Element => {
+const HeaderBar = (): JSX.Element => {
   const { auth, login, logout } = useContext(AuthContext)
   const [username, setUsername] = useState<string | undefined>(undefined)
 
   useEffect(() => {
     auth?.isAuthenticated() &&
-      auth.loadUserProfile().then((n) => {
+      auth?.loadUserProfile().then((n) => {
         setUsername(n.username)
       })
   }, [auth])
@@ -55,4 +55,4 @@ const MenuBar = (): JSX.Element => {
   )
 }
 
-export default MenuBar
+export default HeaderBar
