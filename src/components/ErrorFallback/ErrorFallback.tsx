@@ -1,4 +1,4 @@
-import { Alert } from 'antd'
+import { Alert, Button } from 'antd'
 import React from 'react'
 import type { FallbackProps } from 'react-error-boundary'
 
@@ -11,8 +11,12 @@ export function ErrorFallback({
       message='Error'
       description={error.message}
       type='error'
-      onClick={resetErrorBoundary}
       showIcon
+      action={
+        <Button size='small' type='link' onClick={resetErrorBoundary}>
+          Retry
+        </Button>
+      }
     />
   )
 }
