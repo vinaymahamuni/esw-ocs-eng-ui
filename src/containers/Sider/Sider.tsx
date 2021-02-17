@@ -6,7 +6,6 @@ import TelescopeIcon from '../../assets/images/icons/Telescope.svg'
 import InfraIcon from '../../assets/images/icons/Infrastructure.svg'
 import SettingsIcon from '../../assets/images/icons/Settings.svg'
 import { Link, useLocation } from 'react-router-dom'
-import CheckLogin from '../../routes/CheckLogin'
 
 export const Sider = (): JSX.Element => {
   const [collapsed, setCollapsed] = useState(false)
@@ -55,26 +54,24 @@ export const Sider = (): JSX.Element => {
   ]
   if (location.search.match('/')) setSelectedKeys([])
   return (
-    <CheckLogin fallbackComponent={<> </>}>
-      <Layout.Sider
-        className={styles.sider}
-        theme={'light'}
-        collapsible
-        collapsed={collapsed}
-        onCollapse={onCollapse}>
-        <Menu selectedKeys={selectedKeys}>
-          {menuItemLabels.map((item, i) => (
-            <Menu.Item key={i} icon={item.icon}>
-              <Link role={item.role} to={item.link}>
-                {item.title}
-              </Link>
-            </Menu.Item>
-          ))}
-        </Menu>
-        {/* <div className={styles.siderButton}>
+    <Layout.Sider
+      className={styles.sider}
+      theme={'light'}
+      collapsible
+      collapsed={collapsed}
+      onCollapse={onCollapse}>
+      <Menu selectedKeys={selectedKeys}>
+        {menuItemLabels.map((item, i) => (
+          <Menu.Item key={i} icon={item.icon}>
+            <Link role={item.role} to={item.link}>
+              {item.title}
+            </Link>
+          </Menu.Item>
+        ))}
+      </Menu>
+      {/* <div className={styles.siderButton}>
         <LeftOutlined />
       </div> */}
-      </Layout.Sider>
-    </CheckLogin>
+    </Layout.Sider>
   )
 }

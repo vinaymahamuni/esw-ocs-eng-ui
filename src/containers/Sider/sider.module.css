@@ -2,7 +2,8 @@
 .sider {
   width: fit-content !important;
   max-width: fit-content !important;
-  min-height: 100%;
+  min-height: inherit;
+  flex: 1 0 !important;
 }
 
 .menuIconSize {
