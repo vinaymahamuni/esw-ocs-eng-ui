@@ -17,6 +17,7 @@
     "start": "snowpack dev",
     "build": "snowpack build",
     "test:unit": "web-test-runner 'test/**/*.unit.test.{ts,tsx}'",
+    "test:unit:watch": "web-test-runner 'test/**/*.unit.test.{ts,tsx}' --watch",
     "test": "npm-run-all test:unit",
     "clean": "rm -rf dist && mkdir dist",
     "prebuild": "npm-run-all --parallel clean fix audit",

@@ -13,14 +13,16 @@ describe('SMCard', () => {
     const locationServiceMock = mockServices.mock.locationService
     when(locationServiceMock.find(smConnection)).thenResolve(undefined)
 
-    const { queryAllByText } = renderWithAuth(
+    const { getByRole, queryByRole } = renderWithAuth(
       <SMCard />,
       true,
       mockServices.serviceFactoryContext
     )
 
-    await waitFor(() => expect(queryAllByText('Shutdown')).to.length(0))
-    await waitFor(() => expect(queryAllByText('Spawn')).to.length(1))
+    await waitFor(
+      () => expect(queryByRole('button', { name: /shutdown/i })).to.null
+    )
+    await waitFor(() => expect(getByRole('button', { name: /spawn/i })).exist)
     verify(locationServiceMock.find(smConnection)).called()
   })
 
@@ -35,14 +37,18 @@ describe('SMCard', () => {
     }
     when(locationServiceMock.find(smConnection)).thenResolve(smLocation)
 
-    const { queryAllByText } = renderWithAuth(
+    const { queryByRole, getByRole } = renderWithAuth(
       <SMCard />,
       true,
       mockServices.serviceFactoryContext
     )
 
-    await waitFor(() => expect(queryAllByText('Shutdown')).to.length(1))
-    await waitFor(() => expect(queryAllByText('Spawn')).to.length(0))
+    await waitFor(
+      () => expect(queryByRole('button', { name: /spawn/i })).to.null
+    )
+    await waitFor(
+      () => expect(getByRole('button', { name: /shutdown/i })).exist
+    )
     verify(locationServiceMock.find(smConnection)).called()
   })
 })

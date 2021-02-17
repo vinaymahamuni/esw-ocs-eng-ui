@@ -1,6 +1,6 @@
 import React from 'react'
 import { getMockServices, renderWithAuth } from '../../../../utils/test-utils'
-import { fireEvent, waitFor } from '@testing-library/react'
+import { fireEvent, screen, waitFor, within } from '@testing-library/react'
 import { verify, when } from 'ts-mockito'
 import { smComponentId } from '../../../../../src/features/sm/constants'
 import { expect } from 'chai'
@@ -15,32 +15,29 @@ describe('ShutdownSMButton', () => {
       _type: 'Killed'
     })
 
-    const { queryAllByText, getByText } = renderWithAuth(
+    const { getByRole, getByText, findByRole } = renderWithAuth(
       <ShutdownSMButton />,
       true,
       mockServices.serviceFactoryContext
     )
 
-    await waitFor(() => expect(queryAllByText('Shutdown')).to.length(1))
+    const shutdownButton = await findByRole('button', { name: /shutdown/i })
 
     //User clicks shutdown button
-    fireEvent.click(getByText('Shutdown'))
+    fireEvent.click(shutdownButton)
 
     //modal will appear with shutdown button
-    await waitFor(() =>
-      expect(
-        queryAllByText('Do you want to shutdown Sequence Manager?')
-      ).to.length(1)
-    )
+    await waitFor(() => expect(getByRole('document')).exist)
+    const modalDocument = screen.getByRole('document')
+    const modalShutdownButton = within(modalDocument).getByRole('button', {
+      name: /shutdown/i
+    })
 
     //User clicks modal's shutdown button
-    const modalShutdownButton = queryAllByText('Shutdown')[1]
     fireEvent.click(modalShutdownButton)
 
     await waitFor(() => {
-      expect(
-        queryAllByText('Successfully shutdown Sequence Manager')
-      ).to.length(1)
+      expect(getByText('Successfully shutdown Sequence Manager')).to.exist
     })
     verify(agentServiceMock.killComponent(smComponentId)).called()
   })

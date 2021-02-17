@@ -1,6 +1,6 @@
 import React from 'react'
 import { getMockServices, renderWithAuth } from '../../../../utils/test-utils'
-import { fireEvent, waitFor } from '@testing-library/react'
+import { fireEvent, screen, waitFor, within } from '@testing-library/react'
 import { anything, capture, when } from 'ts-mockito'
 import type { HttpLocation } from '@tmtsoftware/esw-ts'
 import { HttpConnection, Prefix } from '@tmtsoftware/esw-ts'
@@ -28,39 +28,42 @@ describe('SpawnSMButton', () => {
       agentServiceMock.spawnSequenceManager(anything(), obsModeConfig, false)
     ).thenResolve({ _type: 'Spawned' })
 
-    const { queryAllByText, getByText } = renderWithAuth(
+    const { getByText, findByRole } = renderWithAuth(
       <SpawnSMButton />,
       true,
       mockServices.serviceFactoryContext
     )
 
-    await waitFor(() => expect(queryAllByText('Spawn')).to.length(1))
-
     //User clicks spawn button
-    fireEvent.click(getByText('Spawn'))
+    const spawnButton = await findByRole('button', { name: /spawn/i })
+    fireEvent.click(spawnButton)
 
     //modal will appear with spawn button
-    await waitFor(() =>
-      expect(
-        queryAllByText('Choose an agent to spawn Sequence Manager')
-      ).to.length(1)
+    await waitFor(
+      () =>
+        expect(getByText(/choose an agent to spawn sequence manager/i)).exist
     )
-    const modalSpawnButton = queryAllByText('Spawn')[1]
+    const modalDocument = screen.getByRole('document')
+    const modalSpawnButton = within(modalDocument).getByRole('button', {
+      name: /spawn/i
+    })
 
-    //User don't select agent machine and try to select
+    //User don't select agent machine and try to spawn SM
     fireEvent.click(modalSpawnButton)
-    expect(queryAllByText('Please select agent!')).to.length(1)
+    expect(getByText('Please select agent!')).exist
 
-    //user selects agent machine
-    fireEvent.click(getByText(agentPrefix.toJSON()))
+    //User selects agent machine
+    fireEvent.click(
+      within(modalDocument).getByRole('menuitem', {
+        name: agentPrefix.toJSON()
+      })
+    )
 
     //User clicks modal's spawn button
     fireEvent.click(modalSpawnButton)
 
     await waitFor(() => {
-      expect(queryAllByText('Successfully spawned Sequence Manager')).to.length(
-        1
-      )
+      expect(getByText('Successfully spawned Sequence Manager')).exist
     })
 
     const [prefix, expectedConfig, isLocal] = capture(
