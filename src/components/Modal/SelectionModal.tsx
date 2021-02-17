@@ -9,6 +9,34 @@ interface SelectionModalProps extends ModalProps {
   onChange: (value: string) => void
 }
 
+const getList = (
+  selectedItem: string,
+  data: string[] | undefined,
+  onChange: (value: string) => void
+) => {
+  const onSelect = (e: SelectInfo) => onChange(e.key as string)
+  if (data == undefined || data.length == 0) {
+    return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+  }
+
+  return (
+    <Menu selectable onSelect={onSelect}>
+      {data.map((item) => {
+        return (
+          <Menu.Item
+            className={
+              styles.menuItem +
+              ` ${item == selectedItem ? styles.selectedItem : ''}`
+            }
+            style={{ paddingLeft: '24px', marginTop: 0, marginBottom: 0 }}
+            key={item}>
+            {item}
+          </Menu.Item>
+        )
+      })}
+    </Menu>
+  )
+}
 export const SelectionModal = ({
   selectedItem,
   data,
@@ -19,38 +47,16 @@ export const SelectionModal = ({
   onOk,
   onCancel,
   onChange
-}: SelectionModalProps): JSX.Element => {
-  const onSelect = (e: SelectInfo) => onChange(e.key as string)
-
-  return (
-    <Modal
-      title={title}
-      okText={okText}
-      centered
-      visible={visible}
-      confirmLoading={confirmLoading}
-      bodyStyle={{ padding: 0 }}
-      onOk={onOk}
-      onCancel={onCancel}>
-      <Menu selectable onSelect={onSelect}>
-        {(data == undefined || data.length == 0) && (
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-        )}
-        {data &&
-          data.map((item) => {
-            return (
-              <Menu.Item
-                className={
-                  styles.menuItem +
-                  ` ${item == selectedItem ? styles.selectedItem : ''}`
-                }
-                style={{ paddingLeft: '24px', marginTop: 0, marginBottom: 0 }}
-                key={item}>
-                {item}
-              </Menu.Item>
-            )
-          })}
-      </Menu>
-    </Modal>
-  )
-}
+}: SelectionModalProps): JSX.Element => (
+  <Modal
+    title={title}
+    okText={okText}
+    centered
+    visible={visible}
+    confirmLoading={confirmLoading}
+    bodyStyle={{ padding: 0 }}
+    onOk={onOk}
+    onCancel={onCancel}>
+    {getList(selectedItem, data, onChange)}
+  </Modal>
+)
