@@ -6,16 +6,17 @@ import {
 } from '../../../utils/test-utils'
 import { verify, when } from 'ts-mockito'
 import { useAgents } from '../../../../src/features/agent/hooks/useAgents'
-import { HttpConnection, HttpLocation, Prefix } from '@tmtsoftware/esw-ts'
+import {
+  HttpConnection,
+  HttpLocation,
+  Prefix,
+  Location
+} from '@tmtsoftware/esw-ts'
 
 describe('useAgents', () => {
   it('should return list of agents up and running | ESW-441', async () => {
     const mockServices = getMockServices()
     const locationService = mockServices.mock.locationService
-    const ContextAndQueryClientProvider = getContextWithQueryClientProvider(
-      true,
-      mockServices.serviceFactoryContext
-    )
     const agentPrefix = new Prefix('ESW', 'ESW.Machine1')
     const agentLocation: HttpLocation = {
       _type: 'HttpLocation',
@@ -23,10 +24,13 @@ describe('useAgents', () => {
       uri: 'url',
       metadata: {}
     }
-
     when(locationService.listByComponentType('Machine')).thenResolve([
       agentLocation
     ])
+    const ContextAndQueryClientProvider = getContextWithQueryClientProvider(
+      true,
+      mockServices.serviceFactoryContext
+    )
 
     const { result, waitFor } = renderHook(() => useAgents(), {
       wrapper: ContextAndQueryClientProvider

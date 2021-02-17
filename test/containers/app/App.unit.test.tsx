@@ -11,13 +11,15 @@ describe('App page', () => {
   })
 
   it('should render app with layout when user is logged in', async () => {
-    renderWithAuth(
-      <BrowserRouter>
-        <App>
-          <Routes />
-        </App>
-      </BrowserRouter>
-    )
+    renderWithAuth({
+      ui: (
+        <BrowserRouter>
+          <App>
+            <Routes />
+          </App>
+        </BrowserRouter>
+      )
+    })
 
     const resources = screen.queryAllByText('Resources')
     const manageObservations = screen.queryAllByText('Manage Observations')
@@ -31,14 +33,16 @@ describe('App page', () => {
   })
 
   it('should render app without layout when user is not logged in', () => {
-    renderWithAuth(
-      <BrowserRouter>
-        <App>
-          <Routes />
-        </App>
-      </BrowserRouter>,
-      false
-    )
+    renderWithAuth({
+      ui: (
+        <BrowserRouter>
+          <App>
+            <Routes />
+          </App>
+        </BrowserRouter>
+      ),
+      loggedIn: false
+    })
 
     const loginButton = screen.queryByText('Login')
     expect(loginButton).to.exist

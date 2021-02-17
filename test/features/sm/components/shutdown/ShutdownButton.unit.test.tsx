@@ -15,11 +15,11 @@ describe('ShutdownSMButton', () => {
       _type: 'Killed'
     })
 
-    const { getByRole, getByText, findByRole } = renderWithAuth(
-      <ShutdownSMButton />,
-      true,
-      mockServices.serviceFactoryContext
-    )
+    const { getByRole, getByText, findByRole } = renderWithAuth({
+      ui: <ShutdownSMButton />,
+      loggedIn: true,
+      mockClients: mockServices.serviceFactoryContext
+    })
 
     const shutdownButton = await findByRole('button', { name: /shutdown/i })
 

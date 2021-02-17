@@ -8,7 +8,7 @@ import { expect } from 'chai'
 
 const renderWithRouter = (ui: React.ReactElement) => {
   window.history.pushState({}, 'Home page', '/')
-  return renderWithAuth(<BrowserRouter>{ui}</BrowserRouter>, true)
+  return renderWithAuth({ ui: <BrowserRouter>{ui}</BrowserRouter> })
 }
 
 const leftClick = { button: 0 }

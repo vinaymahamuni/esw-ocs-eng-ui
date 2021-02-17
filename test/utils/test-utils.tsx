@@ -7,29 +7,39 @@ import type {
   KeycloakTokenParsed
 } from 'keycloak-js'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
-import { AgentService, AuthContext, LocationService } from '@tmtsoftware/esw-ts'
+import {
+  AgentService,
+  AuthContext,
+  Location,
+  LocationService
+} from '@tmtsoftware/esw-ts'
 import {
   ServiceFactoryContext,
   ServiceFactoryContextType
 } from '../../src/contexts/serviceFactoryContext/ServiceFactoryContext'
-import { instance, mock } from 'ts-mockito'
+import { instance, mock, when } from 'ts-mockito'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { AgentServiceImpl } from '@tmtsoftware/esw-ts/dist/src/clients/agent-service/AgentServiceImpl'
 import { LocationServiceImpl } from '@tmtsoftware/esw-ts/dist/src/clients/location/LocationServiceImpl'
 
 const getMockAuth = (loggedIn: boolean) => {
+  let loggedInValue = loggedIn
   return {
     hasRealmRole: () => true,
     hasResourceRole: () => false,
-    isAuthenticated: () => loggedIn,
-    logout: () => Promise.resolve() as KeycloakPromise<void, void>,
+    isAuthenticated: () => loggedInValue,
+    logout: () => {
+      console.log('asdaonsdakd')
+      loggedInValue = false
+      return Promise.resolve() as KeycloakPromise<void, void>
+    },
     token: () => 'token string',
     tokenParsed: () => ('token string' as unknown) as KeycloakTokenParsed,
     realmAccess: () => ([''] as unknown) as KeycloakRoles,
     resourceAccess: () => ([''] as unknown) as KeycloakResourceAccess,
     loadUserProfile: () =>
       Promise.resolve({
-        username: loggedIn ? 'ESW-USER' : ''
+        username: loggedInValue ? 'ESW-USER' : ''
       }) as KeycloakPromise<KeycloakProfile, void>
   }
 }
@@ -50,6 +60,7 @@ const getMockServices: () => MockServices = () => {
   const agentServiceInstance = instance<AgentService>(agentServiceMock)
   const locationServiceMock = mock(LocationServiceImpl)
   const locationServiceInstance = instance<LocationService>(locationServiceMock)
+  // console.log('creation', locationServiceInstance)
   const serviceFactoryContext: ServiceFactoryContextType = {
     agentServiceFactory: () => Promise.resolve(agentServiceInstance),
     locationServiceFactory: () => locationServiceInstance
@@ -70,7 +81,9 @@ const getMockServices: () => MockServices = () => {
 
 const getContextProvider = (
   loggedIn: boolean,
-  mockClients: ServiceFactoryContextType
+  mockClients: ServiceFactoryContextType,
+  loginFunc: () => void,
+  logoutFunc: () => void
 ) => {
   const auth = getMockAuth(loggedIn)
 
@@ -78,8 +91,8 @@ const getContextProvider = (
     <AuthContext.Provider
       value={{
         auth: auth,
-        login: () => ({}),
-        logout: () => ({})
+        login: loginFunc,
+        logout: logoutFunc
       }}>
       <ServiceFactoryContext.Provider value={mockClients}>
         {children}
@@ -92,10 +105,17 @@ const getContextProvider = (
 
 const getContextWithQueryClientProvider = (
   loggedIn: boolean,
-  mockClients: ServiceFactoryContextType
+  mockClients: ServiceFactoryContextType,
+  loginFunc: () => void,
+  logoutFunc: () => void
 ) => {
   const queryClient = new QueryClient()
-  const ContextProvider = getContextProvider(loggedIn, mockClients)
+  const ContextProvider = getContextProvider(
+    loggedIn,
+    mockClients,
+    loginFunc,
+    logoutFunc
+  )
 
   const provider = ({ children }: { children: React.ReactNode }) => (
     <ContextProvider>
@@ -104,18 +124,30 @@ const getContextWithQueryClientProvider = (
   )
   return provider
 }
+interface MockProps {
+  ui: ReactElement
+  loggedIn?: boolean
+  mockClients?: ServiceFactoryContextType
+  loginFunc?: () => void
+  logoutFunc?: () => void
+}
 
 const renderWithAuth = (
-  ui: ReactElement,
-  loggedIn = true,
-  mockClients: ServiceFactoryContextType = getMockServices()
-    .serviceFactoryContext,
+  {
+    ui,
+    loggedIn = true,
+    mockClients = getMockServices().serviceFactoryContext,
+    loginFunc = () => ({}),
+    logoutFunc = () => ({})
+  }: MockProps,
   options?: Omit<RenderOptions, 'queries'>
 ): RenderResult => {
   return render(ui, {
     wrapper: getContextWithQueryClientProvider(
       loggedIn,
-      mockClients
+      mockClients,
+      loginFunc,
+      logoutFunc
     ) as React.FunctionComponent<Record<string, unknown>>,
     ...options
   })

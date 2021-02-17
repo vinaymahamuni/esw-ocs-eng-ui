@@ -13,11 +13,11 @@ describe('SMCard', () => {
     const locationServiceMock = mockServices.mock.locationService
     when(locationServiceMock.find(smConnection)).thenResolve(undefined)
 
-    const { getByRole, queryByRole } = renderWithAuth(
-      <SMCard />,
-      true,
-      mockServices.serviceFactoryContext
-    )
+    const { getByRole, queryByRole } = renderWithAuth({
+      ui: <SMCard />,
+      loggedIn: true,
+      mockClients: mockServices.serviceFactoryContext
+    })
 
     await waitFor(
       () => expect(queryByRole('button', { name: /shutdown/i })).to.null
@@ -39,11 +39,11 @@ describe('SMCard', () => {
     }
     when(locationServiceMock.find(smConnection)).thenResolve(smLocation)
 
-    const { queryByRole, getByRole } = renderWithAuth(
-      <SMCard />,
-      true,
-      mockServices.serviceFactoryContext
-    )
+    const { queryByRole, getByRole } = renderWithAuth({
+      ui: <SMCard />,
+      loggedIn: true,
+      mockClients: mockServices.serviceFactoryContext
+    })
 
     await waitFor(
       () => expect(queryByRole('button', { name: /spawn/i })).to.null

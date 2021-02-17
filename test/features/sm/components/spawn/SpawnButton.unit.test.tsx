@@ -28,11 +28,11 @@ describe('SpawnSMButton', () => {
       agentServiceMock.spawnSequenceManager(anything(), obsModeConfig, false)
     ).thenResolve({ _type: 'Spawned' })
 
-    const { getByText, findByRole } = renderWithAuth(
-      <SpawnSMButton />,
-      true,
-      mockServices.serviceFactoryContext
-    )
+    const { getByText, findByRole } = renderWithAuth({
+      ui: <SpawnSMButton />,
+      loggedIn: true,
+      mockClients: mockServices.serviceFactoryContext
+    })
 
     //User clicks spawn button
     const spawnButton = await findByRole('button', { name: /spawn/i })
