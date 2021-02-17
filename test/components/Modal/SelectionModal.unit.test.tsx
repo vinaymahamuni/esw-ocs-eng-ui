@@ -28,7 +28,7 @@ describe('SelectionModal', () => {
     expect(data2.innerText).eq('data-2')
   })
 
-  it('should call onChange method when menu item is selected', () => {
+  it('should call onChange method when menu item is selected | ESW-441', () => {
     let value = ''
     const modalProps = {
       data: ['data-1', 'data-2'],
@@ -49,7 +49,7 @@ describe('SelectionModal', () => {
     expect(value).eq('data-1')
   })
 
-  it('should handle onOk and onCancel event', () => {
+  it('should handle onOk and onCancel event | ESW-441', () => {
     let value = ''
     const modalProps = {
       data: [],
@@ -73,7 +73,7 @@ describe('SelectionModal', () => {
     expect(value).eq('canceled')
   })
 
-  it('should not show menu if visible equals false', () => {
+  it('should not show menu if visible equals false | ESW-441', () => {
     const modalProps = {
       data: [],
       title: 'some-title',
@@ -89,7 +89,7 @@ describe('SelectionModal', () => {
     expect(queryByText(/some-title/i)).to.null
   })
 
-  it('should show empty if data is not present', () => {
+  it('should show empty if data is not present | ESW-441', () => {
     const modalProps = {
       data: [],
       title: 'some-title',
