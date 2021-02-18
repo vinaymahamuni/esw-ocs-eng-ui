@@ -2,7 +2,7 @@ import React from 'react'
 import { renderWithAuth, screen, cleanup } from '../../utils/test-utils'
 import { expect } from 'chai'
 import App from '../../../src/containers/app/App' // fixed to absolute path
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
 import Routes from '../../../src/routes'
 
 describe('App page', () => {
@@ -13,11 +13,11 @@ describe('App page', () => {
   it('should render app with layout when user is logged in', async () => {
     renderWithAuth({
       ui: (
-        <BrowserRouter>
+        <Router>
           <App>
             <Routes />
           </App>
-        </BrowserRouter>
+        </Router>
       )
     })
 
@@ -35,11 +35,11 @@ describe('App page', () => {
   it('should render app without layout when user is not logged in', () => {
     renderWithAuth({
       ui: (
-        <BrowserRouter>
+        <Router>
           <App>
             <Routes />
           </App>
-        </BrowserRouter>
+        </Router>
       ),
       loggedIn: false
     })

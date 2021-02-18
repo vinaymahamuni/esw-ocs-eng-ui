@@ -67,7 +67,7 @@ const Home = (): JSX.Element => (
     </Row>
     <Row align={'middle'} className={styles.inheritMinHeight}>
       <Col span={24}>
-        <Row gutter={[32, 32]}>
+        <Row gutter={[32, 32]} className={styles.homePageCardsRow}>
           {cards.map((x, index) => (
             <Col key={index} span={8}>
               {HomePageCard(x)}

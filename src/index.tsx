@@ -1,7 +1,7 @@
 import { AuthContextProvider } from '@tmtsoftware/esw-ts'
 import React from 'react'
 import { render } from 'react-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
 import GlobalSpinner from './components/spinners/globalSpinner/GlobalSpinner'
 import { AppConfig } from './config/AppConfig'
 import App from './containers/app/App'

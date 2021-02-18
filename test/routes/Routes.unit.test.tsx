@@ -1,14 +1,14 @@
 import { screen, renderWithAuth, cleanup } from '../utils/test-utils'
 import React from 'react'
 import userEvent from '@testing-library/user-event'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import App from '../../src/containers/app/App'
 import Routes from '../../src/routes'
 import { expect } from 'chai'
 
 const renderWithRouter = (ui: React.ReactElement) => {
   window.history.pushState({}, 'Home page', '/')
-  return renderWithAuth({ ui: <BrowserRouter>{ui}</BrowserRouter> })
+  return renderWithAuth({ ui: <HashRouter>{ui}</HashRouter> })
 }
 
 const leftClick = { button: 0 }
@@ -28,7 +28,7 @@ describe('Full app navigation', () => {
     expect(manageInfra).to.exist
 
     userEvent.click(manageInfra, leftClick)
-    expect(window.location.pathname).equal('/Infrastructure')
+    expect(window.location.hash).equal('#/Infrastructure')
   })
 
   it('Observations route', () => {
@@ -42,7 +42,7 @@ describe('Full app navigation', () => {
     expect(manageObservations).to.exist
 
     userEvent.click(manageObservations, leftClick)
-    expect(window.location.pathname).equal('/Observations')
+    expect(window.location.hash).equal('#/Observations')
   })
 
   it('Resources', () => {
@@ -56,6 +56,6 @@ describe('Full app navigation', () => {
     expect(resources).to.have.length(2)
 
     userEvent.click(resources[0], leftClick)
-    expect(window.location.pathname).equal('/Resources')
+    expect(window.location.hash).equal('#/Resources')
   })
 })
