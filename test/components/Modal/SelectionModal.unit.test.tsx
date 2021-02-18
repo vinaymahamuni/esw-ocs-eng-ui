@@ -52,13 +52,13 @@ describe('SelectionModal', () => {
   it('should handle onOk and onCancel event | ESW-441', () => {
     let value = ''
     const modalProps = {
-      data: [],
+      data: ['data-1'],
       title: 'some-title',
       okText: 'Start',
       onChange: () => true,
       onOk: () => (value = 'Ok'),
       onCancel: () => (value = 'canceled'),
-      selectedItem: '',
+      selectedItem: 'data-1',
       visible: true
     }
     const { getByRole } = render(<SelectionModal {...modalProps} />)
@@ -71,6 +71,26 @@ describe('SelectionModal', () => {
 
     fireEvent.click(cancelButton)
     expect(value).eq('canceled')
+  })
+
+  it('should not call onOk if any item is not selected | ESW-441', () => {
+    let value = 'value not changed'
+    const modalProps = {
+      data: ['data-1'],
+      title: 'some-title',
+      okText: 'Start',
+      onChange: () => true,
+      onOk: () => (value = 'Ok'),
+      onCancel: () => (value = 'canceled'),
+      selectedItem: '',
+      visible: true
+    }
+    const { getByRole } = render(<SelectionModal {...modalProps} />)
+
+    const okButton = getByRole('button', { name: /start/i })
+
+    fireEvent.click(okButton)
+    expect(value).eq('value not changed')
   })
 
   it('should not show menu if visible equals false | ESW-441', () => {

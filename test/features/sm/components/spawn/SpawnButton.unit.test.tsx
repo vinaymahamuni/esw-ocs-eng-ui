@@ -48,10 +48,6 @@ describe('SpawnSMButton', () => {
       name: /spawn/i
     })
 
-    //User don't select agent machine and try to spawn SM
-    fireEvent.click(modalSpawnButton)
-    expect(getByText('Please select agent!')).to.exist
-
     //User selects agent machine
     fireEvent.click(
       within(modalDocument).getByRole('menuitem', {

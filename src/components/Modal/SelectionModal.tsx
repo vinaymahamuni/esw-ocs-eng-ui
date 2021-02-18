@@ -55,6 +55,9 @@ export const SelectionModal = ({
     visible={visible}
     confirmLoading={confirmLoading}
     bodyStyle={{ padding: 0 }}
+    okButtonProps={{
+      disabled: !selectedItem
+    }}
     onOk={onOk}
     onCancel={onCancel}>
     {getList(selectedItem, data, onChange)}
