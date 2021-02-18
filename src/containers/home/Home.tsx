@@ -13,6 +13,24 @@ type CardDetail = {
   icon: JSX.Element
   link: string
 }
+
+const getCardDetails = (title: string, icon: string, link: string) => {
+  return {
+    title,
+    link,
+    icon: (
+      <Icon
+        component={() => <img src={icon} className={styles.commonIconSize} />}
+      />
+    )
+  }
+}
+const cards: CardDetail[] = [
+  getCardDetails('Manage Infrastructure', InfraIcon, '/Infrastructure'),
+  getCardDetails('Manage Observations', TelescopeIcon, '/Observations'),
+  getCardDetails('Resources', SettingsIcon, '/Resources')
+]
+
 const HomePageCard = (card: CardDetail) => (
   <Link role={card.title} to={card.link}>
     <Card hoverable className={styles.homePageCards}>
@@ -23,42 +41,6 @@ const HomePageCard = (card: CardDetail) => (
     </Card>
   </Link>
 )
-
-const cards: CardDetail[] = [
-  {
-    title: 'Manage Infrastructure',
-    icon: (
-      <Icon
-        component={() => (
-          <img src={InfraIcon} className={styles.commonIconSize} />
-        )}
-      />
-    ),
-    link: '/Infrastructure'
-  },
-  {
-    title: 'Manage Observations',
-    icon: (
-      <Icon
-        component={() => (
-          <img src={TelescopeIcon} className={styles.commonIconSize} />
-        )}
-      />
-    ),
-    link: '/Observations'
-  },
-  {
-    title: 'Resources',
-    icon: (
-      <Icon
-        component={() => (
-          <img src={SettingsIcon} className={styles.commonIconSize} />
-        )}
-      />
-    ),
-    link: '/Resources'
-  }
-]
 
 const Home = (): JSX.Element => (
   <>

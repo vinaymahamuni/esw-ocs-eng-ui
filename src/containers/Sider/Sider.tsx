@@ -1,6 +1,6 @@
 import Icon from '@ant-design/icons'
 import { Layout, Menu } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './sider.module.css'
 import TelescopeBlueIcon from '../../assets/images/icons/Telescope_blue.svg'
 import TelescopeBlackBgIcon from '../../assets/images/icons/Telescope_black.svg'
@@ -57,8 +57,9 @@ export const Sider = (): JSX.Element => {
   const onCollapse = () => {
     setCollapsed(!collapsed)
   }
-
-  if (location.search.match('/')) setSelectedKeys([])
+  useEffect(() => {
+    if (location.pathname === '/') setSelectedKeys([])
+  }, [location])
 
   return (
     <Layout.Sider
