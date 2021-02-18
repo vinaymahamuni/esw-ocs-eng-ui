@@ -2,7 +2,7 @@ import CheckLogin from './CheckLogin'
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Home from '../containers/home/Home'
-
+import NoMatch from './NoMatch'
 const LoginError = () => <div>User not logged in!!!</div>
 
 const Routes = (): JSX.Element => (
@@ -16,6 +16,9 @@ const Routes = (): JSX.Element => (
         </CheckLogin>
       )}
     />
+    <Route path='*'>
+      <NoMatch />
+    </Route>
   </Switch>
 )
 

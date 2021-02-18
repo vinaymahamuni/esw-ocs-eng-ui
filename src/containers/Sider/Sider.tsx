@@ -52,15 +52,15 @@ const menuItemLabels = [
 ]
 export const Sider = (): JSX.Element => {
   const [collapsed, setCollapsed] = useState(false)
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([])
+  const [selectedKey, setSelectedKey] = useState<string>('/')
   const location = useLocation()
   const onCollapse = () => {
     setCollapsed(!collapsed)
   }
   useEffect(() => {
     menuItemLabels.forEach((item, i) => {
-      if (location.pathname === item.link) setSelectedKeys([i.toString()])
-      else if (location.pathname === '/') setSelectedKeys([])
+      if (location.pathname === item.link) setSelectedKey(i.toString())
+      else if (location.pathname === '/') setSelectedKey('/')
     })
   }, [location])
 
@@ -71,13 +71,13 @@ export const Sider = (): JSX.Element => {
       collapsible
       collapsed={collapsed}
       onCollapse={onCollapse}>
-      <Menu selectedKeys={selectedKeys}>
+      <Menu selectedKeys={[selectedKey]}>
         {menuItemLabels.map((item, i) => (
           <Menu.Item
-            onClick={() => setSelectedKeys([i.toString()])}
+            onClick={() => setSelectedKey(i.toString())}
             key={i}
             icon={
-              selectedKeys.includes(i.toString())
+              selectedKey === i.toString()
                 ? item.selectedIcon
                 : item.defaultIcon
             }>
