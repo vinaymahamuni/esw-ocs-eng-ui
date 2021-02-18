@@ -56,7 +56,7 @@ export const ProvisionButton = (): JSX.Element => {
   const smService = useSMService()
 
   const fetchProvisionConfAction = useAction(
-    'c',
+    'provisionConfig',
     fetchProvisionConf(setProvisionRecord),
     'Successfully fetched Provision Config from ConfigService',
     'Failed to fetch Provision Config'
