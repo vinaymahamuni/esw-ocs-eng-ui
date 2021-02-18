@@ -17,7 +17,9 @@ const HomePageCard = (card: CardDetail) => (
   <Link role={card.title} to={card.link}>
     <Card hoverable className={styles.homePageCards}>
       <Icon component={() => card.icon} />
-      <Typography.Title level={3}>{card.title}</Typography.Title>
+      <Typography.Title className={styles.cardTitle} level={3}>
+        {card.title}
+      </Typography.Title>
     </Card>
   </Link>
 )

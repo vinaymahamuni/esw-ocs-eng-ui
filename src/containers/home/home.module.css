@@ -14,6 +14,10 @@
   min-height: inherit;
 }
 
-.homePageCards {
-  height: 192px;
+.homePageCards  {
+  height: 100%;
+}
+
+h3.cardTitle {
+  margin-bottom: 0em;
 }
