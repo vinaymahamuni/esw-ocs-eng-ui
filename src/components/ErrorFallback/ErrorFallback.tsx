@@ -13,7 +13,7 @@ export function ErrorFallback({
       type='error'
       showIcon
       action={
-        <Button size='small' type='link' onClick={resetErrorBoundary}>
+        <Button size='small' type='primary' onClick={resetErrorBoundary}>
           Retry
         </Button>
       }
