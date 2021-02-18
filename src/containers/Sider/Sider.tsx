@@ -58,7 +58,10 @@ export const Sider = (): JSX.Element => {
     setCollapsed(!collapsed)
   }
   useEffect(() => {
-    if (location.pathname === '/') setSelectedKeys([])
+    menuItemLabels.forEach((item, i) => {
+      if (location.pathname === item.link) setSelectedKeys([i.toString()])
+      else if (location.pathname === '/') setSelectedKeys([])
+    })
   }, [location])
 
   return (
