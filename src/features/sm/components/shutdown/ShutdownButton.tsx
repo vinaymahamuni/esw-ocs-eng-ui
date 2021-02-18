@@ -4,7 +4,7 @@ import { Button, Modal } from 'antd'
 import React from 'react'
 import { useAgentService } from '../../../agent/hooks/useAgentService'
 import { smComponentId } from '../../constants'
-import { useSMAction } from '../../hooks/useSMAction'
+import { useAgentServiceAction } from '../../hooks/useAgentServiceAction'
 import { Spinner } from '../../../../components/spinners/Spinner'
 
 function showConfirmModal<T>(onYes: () => Promise<T>): void {
@@ -33,7 +33,7 @@ const shutdownSM = (agent: AgentService) =>
 export const ShutdownSMButton = (): JSX.Element => {
   const agentQuery = useAgentService()
 
-  const shutdownSmAction = useSMAction(
+  const shutdownSmAction = useAgentServiceAction(
     shutdownSM,
     'Successfully shutdown Sequence Manager',
     'Failed to shutdown Sequence Manager'

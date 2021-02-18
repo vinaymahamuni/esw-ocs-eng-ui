@@ -1,18 +1,17 @@
-import type { AgentService } from '@tmtsoftware/esw-ts'
-import { message } from 'antd'
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query'
-import { smStatusKey } from './useSMStatus'
+import { message } from 'antd'
 
-export const useSMAction = <T>(
-  mutationFn: (agent: AgentService) => Promise<T>,
+export const useAction = <S, T>(
+  queryKey: string,
+  mutationFn: (agent: S) => Promise<T>,
   successMsg: string,
   errorMsg: string
-): UseMutationResult<T, unknown, AgentService, unknown> => {
+): UseMutationResult<T, unknown, S> => {
   const qc = useQueryClient()
 
   return useMutation(mutationFn, {
     onSuccess: () => {
-      qc.invalidateQueries(smStatusKey)
+      qc.invalidateQueries(queryKey)
       message.success(successMsg)
     },
     onError: (e) =>

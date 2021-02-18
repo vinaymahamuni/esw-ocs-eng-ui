@@ -1,15 +1,10 @@
-import { AgentService, AuthContext } from '@tmtsoftware/esw-ts'
+import type { AgentService } from '@tmtsoftware/esw-ts'
 import { useContext } from 'react'
-import { useQuery, UseQueryResult } from 'react-query'
+import type { UseQueryResult } from 'react-query'
 import { ServiceFactoryContext } from '../../../contexts/serviceFactoryContext/ServiceFactoryContext'
+import { useService } from '../../utils/hooks/useService'
 
-export const useAgentService = (): UseQueryResult<AgentService, unknown> => {
-  const { auth } = useContext(AuthContext)
-  if (!auth) throw Error('Login to continue ...')
-
+export const useAgentService = (): UseQueryResult<AgentService> => {
   const { agentServiceFactory } = useContext(ServiceFactoryContext)
-
-  return useQuery('agentService', () => agentServiceFactory(auth.token), {
-    useErrorBoundary: true
-  })
+  return useService('agentService', agentServiceFactory)
 }

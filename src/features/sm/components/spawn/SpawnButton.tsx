@@ -3,7 +3,7 @@ import { Button, message } from 'antd'
 import React, { useState } from 'react'
 import { useAgentService } from '../../../agent/hooks/useAgentService'
 import { obsModeConfig } from '../../constants'
-import { useSMAction } from '../../hooks/useSMAction'
+import { useAgentServiceAction } from '../../hooks/useAgentServiceAction'
 import { Spinner } from '../../../../components/spinners/Spinner'
 import { SelectionModal } from '../../../../components/Modal/SelectionModal'
 import { useAgents } from '../../../agent/hooks/useAgents'
@@ -23,7 +23,7 @@ export const SpawnSMButton = (): JSX.Element => {
   const allAgentsQuery = useAgents()
   const agentServiceQuery = useAgentService()
 
-  const spawnSmAction = useSMAction(
+  const spawnSmAction = useAgentServiceAction(
     spawnSM(agentPrefix),
     'Successfully spawned Sequence Manager',
     'Failed to spawn Sequence Manager'
