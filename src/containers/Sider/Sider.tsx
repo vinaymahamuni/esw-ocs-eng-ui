@@ -1,14 +1,14 @@
 import Icon from '@ant-design/icons'
 import { Layout, Menu } from 'antd'
 import React, { useEffect, useState } from 'react'
-import styles from './sider.module.css'
-import TelescopeBlueIcon from '../../assets/images/icons/Telescope_blue.svg'
-import TelescopeBlackBgIcon from '../../assets/images/icons/Telescope_black.svg'
-import InfraBlueIcon from '../../assets/images/icons/Infrastructure_blue.svg'
-import InfraBlackBgIcon from '../../assets/images/icons/Infrastructure_black.svg'
-import SettingsBlueIcon from '../../assets/images/icons/Settings_blue.svg'
-import SettingsBlackBgIcon from '../../assets/images/icons/Settings_black.svg'
 import { Link, useLocation } from 'react-router-dom'
+import InfraBlackBgIcon from '../../assets/images/icons/Infrastructure_black.svg'
+import InfraBlueIcon from '../../assets/images/icons/Infrastructure_blue.svg'
+import SettingsBlackBgIcon from '../../assets/images/icons/Settings_black.svg'
+import SettingsBlueIcon from '../../assets/images/icons/Settings_blue.svg'
+import TelescopeBlackBgIcon from '../../assets/images/icons/Telescope_black.svg'
+import TelescopeBlueIcon from '../../assets/images/icons/Telescope_blue.svg'
+import styles from './sider.module.css'
 const getMenuLabel = (
   title: string,
   defaultIcon: string,

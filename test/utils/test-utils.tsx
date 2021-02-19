@@ -1,11 +1,3 @@
-import React, { ReactElement } from 'react'
-import type {
-  KeycloakProfile,
-  KeycloakPromise,
-  KeycloakResourceAccess,
-  KeycloakRoles,
-  KeycloakTokenParsed
-} from 'keycloak-js'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
 import {
   AgentService,
@@ -14,13 +6,21 @@ import {
   LocationService,
   SequenceManagerService
 } from '@tmtsoftware/esw-ts'
+import { AgentServiceImpl } from '@tmtsoftware/esw-ts/dist/src/clients/agent-service/AgentServiceImpl'
+import type {
+  KeycloakProfile,
+  KeycloakPromise,
+  KeycloakResourceAccess,
+  KeycloakRoles,
+  KeycloakTokenParsed
+} from 'keycloak-js'
+import React, { ReactElement } from 'react'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { instance, mock } from 'ts-mockito'
 import {
   ServiceFactoryContext,
   ServiceFactoryContextType
 } from '../../src/contexts/serviceFactoryContext/ServiceFactoryContext'
-import { instance, mock } from 'ts-mockito'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { AgentServiceImpl } from '@tmtsoftware/esw-ts/dist/src/clients/agent-service/AgentServiceImpl'
 
 const getMockAuth = (loggedIn: boolean) => {
   let loggedInValue = loggedIn

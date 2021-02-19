@@ -1,4 +1,3 @@
-import { createContext } from 'react'
 import {
   AgentService,
   ConfigService,
@@ -6,6 +5,7 @@ import {
   SequenceManagerService,
   TokenFactory
 } from '@tmtsoftware/esw-ts'
+import { createContext } from 'react'
 
 export interface ServiceFactoryContextType {
   locationServiceFactory: () => LocationService

@@ -1,5 +1,5 @@
-import React from 'react'
 import { Spin } from 'antd'
+import React from 'react'
 import { useIsFetching } from 'react-query'
 import './GlobalSpinner.css'
 

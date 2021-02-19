@@ -1,6 +1,6 @@
-import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
 import { expect } from 'chai'
+import React from 'react'
 import { SelectionModal } from '../../../src/components/Modal/SelectionModal'
 
 describe('SelectionModal', () => {

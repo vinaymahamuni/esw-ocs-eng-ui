@@ -1,9 +1,9 @@
+import { Layout } from 'antd'
 import React from 'react'
+import CheckLogin from '../../routes/CheckLogin'
 import { Sider } from '../Sider/Sider'
 import styles from './app.module.css'
 
-import { Layout } from 'antd'
-import CheckLogin from '../../routes/CheckLogin'
 const { Content } = Layout
 interface AppProps {
   children: React.ReactNode

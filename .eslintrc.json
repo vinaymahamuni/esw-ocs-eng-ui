@@ -24,7 +24,20 @@
     "@typescript-eslint/camelcase": 0,
     "import/no-absolute-path": 2,
     "import/first": 2,
-    "import/order": 0
+    "import/no-mutable-exports": "error",
+    "import/no-nodejs-modules": 2,
+    // ensure absolute imports are above relative imports and that unassigned imports are ignored
+    // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md
+    "import/order": [
+      "error",
+      {
+        "groups": [["builtin", "external", "internal"]],
+        "alphabetize": {
+          "order": "asc" /* sort in ascending order. Options: ["ignore", "asc", "desc"] */,
+          "caseInsensitive": true /* ignore case. Options: [true, false] */
+        }
+      }
+    ]
   },
   "settings": {
     "import/resolver": {

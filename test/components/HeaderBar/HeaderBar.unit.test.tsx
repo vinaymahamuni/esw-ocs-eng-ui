@@ -1,10 +1,10 @@
-import React from 'react'
-import { cleanup, renderWithAuth, screen } from '../../utils/test-utils'
-import HeaderBar from '../../../src/components/HeaderBar/HeaderBar'
-import { expect } from 'chai'
-import { BrowserRouter } from 'react-router-dom'
 import userEvent from '@testing-library/user-event'
+import { expect } from 'chai'
+import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import { instance, mock, verify } from 'ts-mockito'
+import HeaderBar from '../../../src/components/HeaderBar/HeaderBar'
+import { cleanup, renderWithAuth, screen } from '../../utils/test-utils'
 
 const leftClick = { button: 0 }
 describe('header bar', () => {

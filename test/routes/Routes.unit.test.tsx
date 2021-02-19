@@ -1,10 +1,10 @@
-import { screen, renderWithAuth, cleanup } from '../utils/test-utils'
-import React from 'react'
 import userEvent from '@testing-library/user-event'
+import { expect } from 'chai'
+import React from 'react'
 import { HashRouter } from 'react-router-dom'
 import App from '../../src/containers/app/App'
 import Routes from '../../src/routes'
-import { expect } from 'chai'
+import { screen, renderWithAuth, cleanup } from '../utils/test-utils'
 
 const renderWithRouter = (ui: React.ReactElement) => {
   window.history.pushState({}, 'Home page', '/')
@@ -17,7 +17,7 @@ describe('Full app navigation', () => {
     cleanup()
   })
 
-  it('Infrastructure route', () => {
+  it('Infrastructure route | ESW-441', () => {
     renderWithRouter(
       <App>
         <Routes />
@@ -31,7 +31,7 @@ describe('Full app navigation', () => {
     expect(window.location.hash).equal('#/Infrastructure')
   })
 
-  it('Observations route', () => {
+  it('Observations route | ESW-441', () => {
     renderWithRouter(
       <App>
         <Routes />
@@ -45,7 +45,7 @@ describe('Full app navigation', () => {
     expect(window.location.hash).equal('#/Observations')
   })
 
-  it('Resources', () => {
+  it('Resources | ESW-441', () => {
     renderWithRouter(
       <App>
         <Routes />

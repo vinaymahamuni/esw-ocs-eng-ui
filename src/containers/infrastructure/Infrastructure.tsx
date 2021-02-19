@@ -1,5 +1,5 @@
-import React from 'react'
 import { Button, Card, PageHeader, Typography, Space } from 'antd'
+import React from 'react'
 import styles from './infrastructure.module.css'
 const { Meta } = Card
 const Infrastructure = (): JSX.Element => (

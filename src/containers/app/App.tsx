@@ -4,8 +4,8 @@ import React from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import HeaderBar from '../../components/HeaderBar/HeaderBar'
-import Container from './Container'
 import styles from './app.module.css'
+import Container from './Container'
 
 const { Header } = Layout
 

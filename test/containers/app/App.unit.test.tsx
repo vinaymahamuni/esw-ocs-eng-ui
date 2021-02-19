@@ -1,16 +1,16 @@
-import React from 'react'
-import { renderWithAuth, screen, cleanup } from '../../utils/test-utils'
 import { expect } from 'chai'
-import App from '../../../src/containers/app/App' // fixed to absolute path
+import React from 'react'
 import { HashRouter as Router } from 'react-router-dom'
+import App from '../../../src/containers/app/App' // fixed to absolute path
 import Routes from '../../../src/routes'
+import { renderWithAuth, screen, cleanup } from '../../utils/test-utils'
 
 describe('App page', () => {
   afterEach(() => {
     cleanup()
   })
 
-  it('should render app with layout when user is logged in', async () => {
+  it('should render app with layout when user is logged in | ESW-441', async () => {
     renderWithAuth({
       ui: (
         <Router>
@@ -32,7 +32,7 @@ describe('App page', () => {
     expect(logoutButton).to.exist
   })
 
-  it('should render app without layout when user is not logged in', () => {
+  it('should render app without layout when user is not logged in | ESW-441', () => {
     renderWithAuth({
       ui: (
         <Router>
