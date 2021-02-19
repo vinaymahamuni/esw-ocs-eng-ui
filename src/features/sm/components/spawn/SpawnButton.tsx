@@ -39,10 +39,18 @@ export const SpawnSMButton = (): JSX.Element => {
     }
   }
 
+  const handleOnButtonClick = () => {
+    if (allAgentsQuery.data && allAgentsQuery.data.length !== 0) {
+      setModalVisibility(true)
+    } else {
+      message.error('No agents are available. Please start the agent.')
+    }
+  }
   const handleModalCancel = () => setModalVisibility(false)
   const handleModalAgentSelection = (value: string) => setAgentPrefix(value)
 
-  if (agentServiceQuery.isLoading) return <Spinner />
+  if (agentServiceQuery.isLoading || allAgentsQuery.isLoading)
+    return <Spinner />
 
   return (
     <>
@@ -50,7 +58,7 @@ export const SpawnSMButton = (): JSX.Element => {
         type='primary'
         size='middle'
         loading={spawnSmAction.isLoading}
-        onClick={() => setModalVisibility(true)}>
+        onClick={handleOnButtonClick}>
         Spawn
       </Button>
       <SelectionModal

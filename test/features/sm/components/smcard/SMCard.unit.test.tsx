@@ -6,11 +6,23 @@ import { smConnection } from '../../../../../src/features/sm/constants'
 import type { HttpLocation } from '@tmtsoftware/esw-ts'
 import { expect } from 'chai'
 import SMCard from '../../../../../src/features/sm/components/smcard/SMCard'
+import { HttpConnection, Prefix } from '@tmtsoftware/esw-ts'
 
 describe('SMCard', () => {
   it('should show Spawn button if Sequence Manager is not spawned | ESW-441', async () => {
     const mockServices = getMockServices()
     const locationServiceMock = mockServices.mock.locationService
+    const agentPrefix = new Prefix('ESW', 'ESW.Machine1')
+    const agentLocation: HttpLocation = {
+      _type: 'HttpLocation',
+      connection: HttpConnection(agentPrefix, 'Service'),
+      uri: 'url',
+      metadata: {}
+    }
+
+    when(locationServiceMock.listByComponentType('Machine')).thenResolve([
+      agentLocation
+    ])
     when(locationServiceMock.find(smConnection)).thenResolve(undefined)
 
     const { getByRole, queryByRole } = renderWithAuth({
@@ -31,6 +43,17 @@ describe('SMCard', () => {
   it('should show Shutdown button if Sequence Manager is already spawned | ESW-441', async () => {
     const mockServices = getMockServices()
     const locationServiceMock = mockServices.mock.locationService
+    const agentPrefix = new Prefix('ESW', 'ESW.Machine1')
+    const agentLocation: HttpLocation = {
+      _type: 'HttpLocation',
+      connection: HttpConnection(agentPrefix, 'Service'),
+      uri: 'url',
+      metadata: {}
+    }
+
+    when(locationServiceMock.listByComponentType('Machine')).thenResolve([
+      agentLocation
+    ])
     const smLocation: HttpLocation = {
       _type: 'HttpLocation',
       connection: smConnection,
