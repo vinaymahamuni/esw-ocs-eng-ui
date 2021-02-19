@@ -9,7 +9,6 @@ import styles from './smcard.module.css'
 
 const SMCard = (): JSX.Element => {
   const smStatus = useSMStatus()
-
   return (
     <Card
       size='default'
