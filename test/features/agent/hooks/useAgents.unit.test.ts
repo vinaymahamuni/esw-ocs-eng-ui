@@ -1,12 +1,12 @@
-import { expect } from 'chai'
 import { renderHook } from '@testing-library/react-hooks/dom'
+import { HttpConnection, HttpLocation, Prefix } from '@tmtsoftware/esw-ts'
+import { expect } from 'chai'
+import { verify, when } from 'ts-mockito'
+import { useAgents } from '../../../../src/features/agent/hooks/useAgents'
 import {
   getContextWithQueryClientProvider,
   getMockServices
 } from '../../../utils/test-utils'
-import { verify, when } from 'ts-mockito'
-import { useAgents } from '../../../../src/features/agent/hooks/useAgents'
-import { HttpConnection, HttpLocation, Prefix } from '@tmtsoftware/esw-ts'
 
 describe('useAgents', () => {
   it('should return list of agents up and running | ESW-441', async () => {

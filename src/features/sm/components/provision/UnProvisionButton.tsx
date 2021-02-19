@@ -3,8 +3,8 @@ import type { SequenceManagerService } from '@tmtsoftware/esw-ts'
 import { Button, Modal } from 'antd'
 import React from 'react'
 import { Spinner } from '../../../../components/spinners/Spinner'
-import { useSMService } from '../hooks/useSMService'
 import { useProvisionAction } from '../../hooks/useProvisionAction'
+import { useSMService } from '../hooks/useSMService'
 
 function showConfirmModal<T>(onYes: () => Promise<T>): void {
   Modal.confirm({

@@ -1,10 +1,10 @@
 import { Card, Typography } from 'antd'
 import React from 'react'
 import { withErrorBoundary } from 'react-error-boundary'
+import { ErrorFallback } from '../../../../components/ErrorFallback/ErrorFallback'
 import { useSMStatus } from '../../hooks/useSMStatus'
 import { ShutdownSMButton } from '../shutdown/ShutdownButton'
 import { SpawnSMButton } from '../spawn/SpawnButton'
-import { ErrorFallback } from '../../../../components/ErrorFallback/ErrorFallback'
 import styles from './smcard.module.css'
 
 const SMCard = (): JSX.Element => {

@@ -1,6 +1,6 @@
+import { renderHook } from '@testing-library/react-hooks/dom'
 import { expect } from 'chai'
 import { useAgentService } from '../../../../src/features/agent/hooks/useAgentService'
-import { renderHook } from '@testing-library/react-hooks/dom'
 import {
   getContextWithQueryClientProvider,
   getMockServices

@@ -1,7 +1,7 @@
 import { Button, Card, PageHeader, Typography, Space } from 'antd'
 import React from 'react'
-import styles from './infrastructure.module.css'
 import { useSMStatus } from '../../features/sm/hooks/useSMStatus'
+import styles from './infrastructure.module.css'
 const { Meta } = Card
 
 const SmActions = (): JSX.Element => (

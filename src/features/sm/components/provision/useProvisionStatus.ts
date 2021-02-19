@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from 'react-query'
-import { useSMService } from '../hooks/useSMService'
 import { ProvisionActionQueryKey } from '../../hooks/useProvisionAction'
+import { useSMService } from '../hooks/useSMService'
 
 export const useProvisionStatus = (): UseQueryResult<boolean> => {
   const smService = useSMService()

@@ -1,6 +1,6 @@
-import { useQuery, UseQueryResult } from 'react-query'
 import { AuthContext, TokenFactory } from '@tmtsoftware/esw-ts'
 import { useContext } from 'react'
+import { useQuery, UseQueryResult } from 'react-query'
 
 export const useService = <S>(
   serviceName: string,

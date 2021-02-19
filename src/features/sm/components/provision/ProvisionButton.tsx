@@ -1,7 +1,3 @@
-import React, { useState } from 'react'
-import { Button, message, Modal } from 'antd'
-import { useConfigService } from '../../../config/hooks/useConfigService'
-import { useSMService } from '../hooks/useSMService'
 import {
   AgentProvisionConfig,
   ConfigService,
@@ -9,11 +5,15 @@ import {
   ProvisionConfig,
   SequenceManagerService
 } from '@tmtsoftware/esw-ts'
-import { ProvisionTable } from './ProvisionTable'
+import { Button, message, Modal } from 'antd'
+import React, { useState } from 'react'
 import { Spinner } from '../../../../components/spinners/Spinner'
+import { useConfigService } from '../../../config/hooks/useConfigService'
 import { useAction } from '../../../utils/hooks/useAction'
-import { useProvisionAction } from '../../hooks/useProvisionAction'
 import { ProvisionConfPath } from '../../constants'
+import { useProvisionAction } from '../../hooks/useProvisionAction'
+import { useSMService } from '../hooks/useSMService'
+import { ProvisionTable } from './ProvisionTable'
 
 type ProvisionRecord = Record<string, number>
 

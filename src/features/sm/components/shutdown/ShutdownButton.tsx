@@ -2,10 +2,10 @@ import { ExclamationCircleOutlined } from '@ant-design/icons'
 import type { AgentService } from '@tmtsoftware/esw-ts'
 import { Button, Modal } from 'antd'
 import React from 'react'
+import { Spinner } from '../../../../components/spinners/Spinner'
 import { useAgentService } from '../../../agent/hooks/useAgentService'
 import { smComponentId } from '../../constants'
 import { useAgentServiceAction } from '../../hooks/useAgentServiceAction'
-import { Spinner } from '../../../../components/spinners/Spinner'
 
 function showConfirmModal<T>(onYes: () => Promise<T>): void {
   Modal.confirm({

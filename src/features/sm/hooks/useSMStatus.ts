@@ -1,8 +1,8 @@
-import { useContext } from 'react'
 import type { AkkaLocation, Option } from '@tmtsoftware/esw-ts'
+import { useContext } from 'react'
 import { useQuery, UseQueryResult } from 'react-query'
-import { smConnection } from '../constants'
 import { ServiceFactoryContext } from '../../../contexts/serviceFactoryContext/ServiceFactoryContext'
+import { smConnection } from '../constants'
 
 export const smStatusKey = 'smStatus'
 

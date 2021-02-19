@@ -1,12 +1,12 @@
-import React from 'react'
-import { getMockServices, renderWithAuth } from '../../../../utils/test-utils'
 import { waitFor } from '@testing-library/react'
-import { verify, when } from 'ts-mockito'
-import { smConnection } from '../../../../../src/features/sm/constants'
 import type { HttpLocation } from '@tmtsoftware/esw-ts'
-import { expect } from 'chai'
-import SMCard from '../../../../../src/features/sm/components/smcard/SMCard'
 import { HttpConnection, Prefix } from '@tmtsoftware/esw-ts'
+import { expect } from 'chai'
+import React from 'react'
+import { verify, when } from 'ts-mockito'
+import SMCard from '../../../../../src/features/sm/components/smcard/SMCard'
+import { smConnection } from '../../../../../src/features/sm/constants'
+import { getMockServices, renderWithAuth } from '../../../../utils/test-utils'
 
 describe('SMCard', () => {
   it('should show Spawn button if Sequence Manager is not spawned | ESW-441', async () => {

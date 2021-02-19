@@ -1,6 +1,6 @@
 import { InputNumber, Table } from 'antd'
-import React from 'react'
 import type { ColumnsType } from 'antd/lib/table/interface'
+import React from 'react'
 
 interface ProvisionProps {
   provisionRecord: Record<string, number>

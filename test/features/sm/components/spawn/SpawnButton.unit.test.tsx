@@ -1,12 +1,12 @@
-import React from 'react'
-import { getMockServices, renderWithAuth } from '../../../../utils/test-utils'
 import { fireEvent, screen, waitFor, within } from '@testing-library/react'
-import { anything, capture, when } from 'ts-mockito'
 import type { HttpLocation } from '@tmtsoftware/esw-ts'
 import { HttpConnection, Prefix } from '@tmtsoftware/esw-ts'
 import { expect } from 'chai'
+import React from 'react'
+import { anything, capture, when } from 'ts-mockito'
 import { SpawnSMButton } from '../../../../../src/features/sm/components/spawn/SpawnButton'
 import { obsModeConfig } from '../../../../../src/features/sm/constants'
+import { getMockServices, renderWithAuth } from '../../../../utils/test-utils'
 
 describe('SpawnSMButton', () => {
   it('should spawn the sequence manager | ESW-441', async () => {

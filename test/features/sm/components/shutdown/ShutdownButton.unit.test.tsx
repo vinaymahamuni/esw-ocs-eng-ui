@@ -1,10 +1,10 @@
-import React from 'react'
-import { getMockServices, renderWithAuth } from '../../../../utils/test-utils'
 import { fireEvent, screen, waitFor, within } from '@testing-library/react'
-import { verify, when } from 'ts-mockito'
-import { smComponentId } from '../../../../../src/features/sm/constants'
 import { expect } from 'chai'
+import React from 'react'
+import { verify, when } from 'ts-mockito'
 import { ShutdownSMButton } from '../../../../../src/features/sm/components/shutdown/ShutdownButton'
+import { smComponentId } from '../../../../../src/features/sm/constants'
+import { getMockServices, renderWithAuth } from '../../../../utils/test-utils'
 
 describe('ShutdownSMButton', () => {
   it('should shutdown the sequence manager | ESW-441', async () => {

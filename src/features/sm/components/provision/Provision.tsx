@@ -1,9 +1,9 @@
 import React from 'react'
+import { withErrorBoundary } from 'react-error-boundary'
+import { ErrorFallback } from '../../../../components/ErrorFallback/ErrorFallback'
 import { ProvisionButton } from './ProvisionButton'
 import { UnProvisionButton } from './UnProvisionButton'
 import { useProvisionStatus } from './useProvisionStatus'
-import { withErrorBoundary } from 'react-error-boundary'
-import { ErrorFallback } from '../../../../components/ErrorFallback/ErrorFallback'
 
 const Provision = (): JSX.Element => {
   const provisionStatus = useProvisionStatus()
