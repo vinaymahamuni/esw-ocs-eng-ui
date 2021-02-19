@@ -32,7 +32,13 @@ jobs:
         run: npm run build
 
       - name: Unit tests
-        run: npm run test:unit ##TODO: Add test-reporter logic
+        run: npm run test:ci
+
+      - name: Generate RTM
+        if: always()
+        continue-on-error: true
+        run: |
+          sh rtm.sh
 
       - name: Notify slack
         if: always()

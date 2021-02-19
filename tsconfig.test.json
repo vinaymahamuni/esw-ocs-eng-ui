@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false
+  },
+  "include": ["./test/utils/TestReporter.ts", "./test/utils/ReporterUtils.ts"]
+}

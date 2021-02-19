@@ -10,6 +10,7 @@
   },
   "plugins": [["@snowpack/plugin-typescript"]],
   "packageOptions": {
-    "polyfillNode": true
+    "polyfillNode": true,
+    "external": ["fs", "os", "path"]
   }
 }
