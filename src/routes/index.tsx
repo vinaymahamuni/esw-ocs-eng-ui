@@ -8,6 +8,7 @@ import Infrastructure from '../containers/infrastructure/Infrastructure'
 const LoginError = () => <div>User not logged in!!!</div>
 
 const Routes = (): JSX.Element => (
+  //TODO home page not rendering because of query param `&state=asdf` & route match is using exact
   <Switch>
     <Route
       exact

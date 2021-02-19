@@ -7,7 +7,7 @@ import type {
   KeycloakTokenParsed
 } from 'keycloak-js'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
-import { AgentService, AuthContext, LocationService } from '@tmtsoftware/esw-ts'
+import { AgentService, AuthContext, ConfigService, LocationService, SequenceManagerService } from '@tmtsoftware/esw-ts'
 import {
   ServiceFactoryContext,
   ServiceFactoryContextType
@@ -52,13 +52,22 @@ type MockServices = {
 
 const getMockServices: () => MockServices = () => {
   const agentServiceMock = mock(AgentServiceImpl)
-  const agentServiceInstance = instance<AgentService>(agentServiceMock)
-  const locationServiceMock = mock(LocationServiceImpl)
-  const locationServiceInstance = instance<LocationService>(locationServiceMock)
-  // console.log('creation', locationServiceInstance)
+  const agentServiceInstance = instance(agentServiceMock)
+  //FIXME: TypeError: Cannot read property 'map' of null at Object.getAllAgentPrefix while running tests
+  const locationServiceMock = mock<LocationService>()
+  const locationServiceInstance = instance(locationServiceMock)
+  
+  const smServiceMock = mock<SequenceManagerService>()
+  const smServiceInstance = instance(smServiceMock)
+  
+  const configServiceMock = mock<ConfigService>()
+  const configServiceInstance = instance(configServiceMock)
+  
   const serviceFactoryContext: ServiceFactoryContextType = {
     agentServiceFactory: () => Promise.resolve(agentServiceInstance),
-    locationServiceFactory: () => locationServiceInstance
+    locationServiceFactory: () => locationServiceInstance,
+    configServiceFactory: () => Promise.resolve(configServiceInstance),
+    smServiceFactory: () => Promise.resolve(smServiceInstance)
   }
 
   return {
