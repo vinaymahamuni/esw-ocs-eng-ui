@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Modal } from 'antd'
+import { Button, message, Modal } from 'antd'
 import { useConfigService } from '../../../config/hooks/useConfigService'
 import { useSMService } from '../hooks/useSMService'
 import {
@@ -11,8 +11,9 @@ import {
 } from '@tmtsoftware/esw-ts'
 import { ProvisionTable } from './ProvisionTable'
 import { Spinner } from '../../../../components/spinners/Spinner'
-import { useAction } from '../../../utils/hooks/useMutation'
+import { useAction } from '../../../utils/hooks/useAction'
 import { useProvisionAction } from '../../hooks/useProvisionAction'
+import { ProvisionConfPath } from '../../constants'
 
 type ProvisionRecord = Record<string, number>
 
@@ -35,15 +36,13 @@ const parseProvisionConf = (provisionRecord: ProvisionRecord) => {
   return new ProvisionConfig(agentProvisionConfigs)
 }
 
-const fetchProvisionConf = (callBack: (p: ProvisionRecord) => void) => async (
+const fetchProvisionConf = async (
   configService: ConfigService
-): Promise<void> => {
-  const confOption = await configService.getActive('/provision.json')
+): Promise<ProvisionRecord> => {
+  const confOption = await configService.getActive(ProvisionConfPath)
   if (!confOption) throw Error('Provision conf is not present')
-  const text = await confOption.fileContentAsString()
-
-  const config: Record<string, never> = JSON.parse(text)
-  callBack(config['esw-sm']['provision'])
+  const provisionConfRecord = await confOption.fileContentAsString()
+  return JSON.parse(provisionConfRecord)
 }
 
 export const ProvisionButton = (): JSX.Element => {
@@ -57,9 +56,17 @@ export const ProvisionButton = (): JSX.Element => {
 
   const fetchProvisionConfAction = useAction(
     'provisionConfig',
-    fetchProvisionConf(setProvisionRecord),
+    fetchProvisionConf,
     'Successfully fetched Provision Config from ConfigService',
-    'Failed to fetch Provision Config'
+    'Failed to fetch Provision Config',
+    async (data) => {
+      if (Object.values(data).length <= 0) {
+        await message.error('Provision config is empty')
+      } else {
+        setProvisionRecord(data)
+        setModalVisibility(true)
+      }
+    }
   )
 
   const provisionAction = useProvisionAction(
@@ -72,7 +79,6 @@ export const ProvisionButton = (): JSX.Element => {
 
   const onProvisionClick = () => {
     if (configService.data) fetchProvisionConfAction.mutate(configService.data)
-    setModalVisibility(true)
   }
 
   const handleModalOk = () => {
@@ -90,7 +96,7 @@ export const ProvisionButton = (): JSX.Element => {
         Provision
       </Button>
       <Modal
-        title='Choose an agent to spawn Sequence Manager'
+        title='Provision Config'
         okText='Provision'
         centered
         visible={modalVisibility}

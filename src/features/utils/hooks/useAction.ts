@@ -5,13 +5,15 @@ export const useAction = <S, T>(
   queryKey: string,
   mutationFn: (agent: S) => Promise<T>,
   successMsg: string,
-  errorMsg: string
+  errorMsg: string,
+  onSuccess?: (a: T) => void
 ): UseMutationResult<T, unknown, S> => {
   const qc = useQueryClient()
 
   return useMutation(mutationFn, {
-    onSuccess: () => {
-      qc.invalidateQueries(queryKey)
+    onSuccess: async (data) => {
+      await qc.invalidateQueries(queryKey)
+      onSuccess?.(data)
       message.success(successMsg)
     },
     onError: (e) =>

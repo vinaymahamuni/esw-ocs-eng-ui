@@ -1,7 +1,7 @@
 import type { AgentService } from '@tmtsoftware/esw-ts'
 import type { UseMutationResult } from 'react-query'
 import { smStatusKey } from './useSMStatus'
-import { useAction } from '../../utils/hooks/useMutation'
+import { useAction } from '../../utils/hooks/useAction'
 
 export const useAgentServiceAction = <T>(
   mutationFn: (agent: AgentService) => Promise<T>,
