@@ -23,7 +23,7 @@
     "clean": "rm -rf dist && mkdir dist",
     "prebuild": "npm-run-all --parallel clean fix audit",
     "fix": "npm-run-all --parallel clean fix:eslint fix:prettier",
-    "fix:eslint": "eslint --fix --config .eslintrc.js './**/*.{ts,tsx}'",
+    "fix:eslint": "eslint --fix --config .eslintrc.json './**/*.{ts,tsx}'",
     "fix:prettier": "prettier --write --config ./.prettierrc './**/*.{ts,tsx}' ",
     "audit": "npm audit"
   },

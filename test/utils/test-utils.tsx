@@ -7,7 +7,13 @@ import type {
   KeycloakTokenParsed
 } from 'keycloak-js'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
-import { AgentService, AuthContext, ConfigService, LocationService, SequenceManagerService } from '@tmtsoftware/esw-ts'
+import {
+  AgentService,
+  AuthContext,
+  ConfigService,
+  LocationService,
+  SequenceManagerService
+} from '@tmtsoftware/esw-ts'
 import {
   ServiceFactoryContext,
   ServiceFactoryContextType
@@ -15,7 +21,6 @@ import {
 import { instance, mock } from 'ts-mockito'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { AgentServiceImpl } from '@tmtsoftware/esw-ts/dist/src/clients/agent-service/AgentServiceImpl'
-import { LocationServiceImpl } from '@tmtsoftware/esw-ts/dist/src/clients/location/LocationServiceImpl'
 
 const getMockAuth = (loggedIn: boolean) => {
   let loggedInValue = loggedIn
@@ -56,13 +61,13 @@ const getMockServices: () => MockServices = () => {
   //FIXME: TypeError: Cannot read property 'map' of null at Object.getAllAgentPrefix while running tests
   const locationServiceMock = mock<LocationService>()
   const locationServiceInstance = instance(locationServiceMock)
-  
+
   const smServiceMock = mock<SequenceManagerService>()
   const smServiceInstance = instance(smServiceMock)
-  
+
   const configServiceMock = mock<ConfigService>()
   const configServiceInstance = instance(configServiceMock)
-  
+
   const serviceFactoryContext: ServiceFactoryContextType = {
     agentServiceFactory: () => Promise.resolve(agentServiceInstance),
     locationServiceFactory: () => locationServiceInstance,
