@@ -17,10 +17,7 @@ import type {
 import React, { ReactElement } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { instance, mock } from 'ts-mockito'
-import {
-  ServiceFactoryContext,
-  ServiceFactoryContextType
-} from '../../src/contexts/serviceFactoryContext/ServiceFactoryContext'
+import { ServiceFactoryContextType, ServiceFactoryProvider } from '../../src/contexts/serviceFactoryContext/ServiceFactoryContext'
 
 const getMockAuth = (loggedIn: boolean) => {
   let loggedInValue = loggedIn
@@ -103,9 +100,9 @@ const getContextProvider = (
         login: loginFunc,
         logout: logoutFunc
       }}>
-      <ServiceFactoryContext.Provider value={mockClients}>
+      <ServiceFactoryProvider value={mockClients}>
         {children}
-      </ServiceFactoryContext.Provider>
+      </ServiceFactoryProvider>
     </AuthContext.Provider>
   )
 
