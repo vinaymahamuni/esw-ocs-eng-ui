@@ -1,14 +1,14 @@
-import { Button, Card, PageHeader, Typography, Space } from 'antd'
+import { Button, Card, PageHeader, Space, Typography } from 'antd'
 import React from 'react'
 import { useSMStatus } from '../../features/sm/hooks/useSMStatus'
 import styles from './infrastructure.module.css'
+import Provision from '../../features/sm/components/provision/Provision'
+
 const { Meta } = Card
 
 const SmActions = (): JSX.Element => (
   <Space>
-    <Button type='primary' size='middle'>
-      Provision
-    </Button>
+    <Provision />
     <Button disabled size='middle'>
       Configure
     </Button>

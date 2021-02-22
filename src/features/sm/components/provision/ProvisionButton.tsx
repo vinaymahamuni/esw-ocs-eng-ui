@@ -7,7 +7,6 @@ import {
 } from '@tmtsoftware/esw-ts'
 import { Button, message, Modal } from 'antd'
 import React, { useState } from 'react'
-import { Spinner } from '../../../../components/spinners/Spinner'
 import { useConfigService } from '../../../config/hooks/useConfigService'
 import { useAction } from '../../../utils/hooks/useAction'
 import { ProvisionConfPath } from '../../constants'
@@ -75,7 +74,7 @@ export const ProvisionButton = (): JSX.Element => {
     'Failed to provision'
   )
 
-  if (configService.isLoading || smService.isLoading) return <Spinner />
+  const disabled = configService.isLoading || smService.isLoading
 
   const onProvisionClick = () => {
     if (configService.data) fetchProvisionConfAction.mutate(configService.data)
@@ -91,6 +90,7 @@ export const ProvisionButton = (): JSX.Element => {
       <Button
         type='primary'
         size='middle'
+        disabled={disabled}
         loading={provisionAction.isLoading}
         onClick={onProvisionClick}>
         Provision
