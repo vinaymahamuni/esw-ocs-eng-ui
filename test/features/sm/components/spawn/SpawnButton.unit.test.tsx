@@ -41,7 +41,7 @@ describe('SpawnSMButton', () => {
     //modal will appear with spawn button
     await waitFor(
       () =>
-        expect(getByText(/choose an agent to spawn sequence manager/i)).to.exist
+        expect(getByText(/choose an agent to spawn the sequence manager/i)).to.exist
     )
     const modalDocument = screen.getByRole('document')
     const modalSpawnButton = within(modalDocument).getByRole('button', {
