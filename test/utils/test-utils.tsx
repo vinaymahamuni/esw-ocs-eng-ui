@@ -26,7 +26,6 @@ const getMockAuth = (loggedIn: boolean) => {
     hasResourceRole: () => false,
     isAuthenticated: () => loggedInValue,
     logout: () => {
-      console.log('asdaonsdakd')
       loggedInValue = false
       return Promise.resolve() as KeycloakPromise<void, void>
     },

@@ -1,3 +1,9 @@
+import type {
+  AkkaLocation,
+  HttpLocation,
+  Option,
+  TcpConnection
+} from '@tmtsoftware/esw-ts'
 import { Button, Card, PageHeader, Space, Typography } from 'antd'
 import React from 'react'
 import Provision from '../../features/sm/components/provision/Provision'
@@ -17,9 +23,13 @@ const SmActions = (): JSX.Element => (
 
 const SmStatus = (): JSX.Element => {
   const { data } = useSMStatus()
-  const smStatus = data?.metadata.agentPrefix
-    ? `Running on ${data.metadata.agentPrefix}`
-    : 'Service Down'
+  const smStatus = data?.metadata.agentPrefix ? (
+    <Typography.Text type='success'>
+      Running on {data.metadata.agentPrefix}
+    </Typography.Text>
+  ) : (
+    <Typography.Text type='danger'>Service Down</Typography.Text>
+  )
   return (
     <Space direction='vertical' size={3}>
       <Typography.Text className={styles.pageTitle}>
@@ -29,7 +39,7 @@ const SmStatus = (): JSX.Element => {
         description={
           <>
             <Typography.Text type='secondary'>{' Status: '}</Typography.Text>
-            <Typography.Text type='success'> {smStatus}</Typography.Text>
+            {smStatus}
           </>
         }
       />
