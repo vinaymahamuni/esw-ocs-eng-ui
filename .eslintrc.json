@@ -1,4 +1,4 @@
-{ 
+{
   "parser": "@typescript-eslint/parser",
   "extends": [
     "plugin:@typescript-eslint/recommended",
@@ -8,7 +8,9 @@
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:testing-library/recommended",
+    "plugin:testing-library/react"
   ],
   "plugins": [
     "@typescript-eslint",
@@ -24,6 +26,7 @@
     "@typescript-eslint/camelcase": 0,
     "import/no-absolute-path": 2,
     "import/first": 2,
+    "@typescript-eslint/no-explicit-any": 2,
     "import/no-mutable-exports": "error",
     "import/no-nodejs-modules": 2,
     // ensure absolute imports are above relative imports and that unassigned imports are ignored
