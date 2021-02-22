@@ -7,31 +7,30 @@ import NoMatch from './NoMatch'
 
 const LoginError = () => <div>User not logged in!!!</div>
 
-const Routes = (): JSX.Element => (
-  //TODO home page not rendering because of query param `&state=asdf` & route match is using exact
-  <Switch>
-    <Route
-      exact
-      path='/'
-      render={() => (
-        <CheckLogin fallbackComponent={<LoginError />}>
-          <Home />
-        </CheckLogin>
-      )}
-    />
+const Routes = (): JSX.Element => {
+  return (
+    <Switch>
+      <Route
+        exact
+        path='/'
+        render={() => (
+          <CheckLogin fallbackComponent={<LoginError />}>
+            <Home />
+          </CheckLogin>
+        )}
+      />
 
-    <Route
-      path='/Infrastructure'
-      render={() => (
-        <CheckLogin fallbackComponent={<LoginError />}>
-          <Infrastructure />
-        </CheckLogin>
-      )}
-    />
-    <Route path='*'>
-      <NoMatch />
-    </Route>
-  </Switch>
-)
+      <Route
+        path='/Infrastructure'
+        render={() => (
+          <CheckLogin fallbackComponent={<LoginError />}>
+            <Infrastructure />
+          </CheckLogin>
+        )}
+      />
+      <Route path='/*' render={() => <NoMatch />} />
+    </Switch>
+  )
+}
 
 export default Routes

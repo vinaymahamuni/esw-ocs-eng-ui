@@ -1,4 +1,4 @@
-import type { Reporter, TestSuiteResult } from '@web/test-runner'
+import type { Reporter } from '@web/test-runner'
 // eslint-disable-next-line import/no-nodejs-modules
 import * as fs from 'fs'
 // eslint-disable-next-line import/no-nodejs-modules
@@ -13,7 +13,6 @@ const cwd = path.resolve()
 const OUTPUT_PATH = path.resolve(path.join(cwd, outputFilePath))
 
 export const TestReporter = ({ reportResults = true } = {}): Reporter => {
-  const testResults: TestSuiteResult[] = []
   return {
     start() {
       if (fs.existsSync(OUTPUT_PATH)) {
