@@ -26,7 +26,7 @@ export const SpawnSMButton = (): JSX.Element => {
   const spawnSmAction = useAgentServiceAction(
     spawnSM(agentPrefix),
     'Successfully spawned Sequence Manager',
-    'Failed to spawn Sequence Manager'
+    'Sequence Manager could not be spawned. Please try again.'
   )
 
   const handleModalOk = () => {
@@ -43,7 +43,7 @@ export const SpawnSMButton = (): JSX.Element => {
     if (allAgentsQuery.data && allAgentsQuery.data.length !== 0) {
       setModalVisibility(true)
     } else {
-      message.error('No agents are available. Please start the agent.')
+      message.error('Agents are not running. Please start an agent first.')
     }
   }
   const handleModalCancel = () => setModalVisibility(false)
@@ -62,7 +62,7 @@ export const SpawnSMButton = (): JSX.Element => {
         Spawn
       </Button>
       <SelectionModal
-        title='Choose an agent to spawn Sequence Manager'
+        title='Choose an agent to spawn the Sequence Manager'
         okText='Spawn'
         visible={modalVisibility}
         confirmLoading={spawnSmAction.isLoading}
