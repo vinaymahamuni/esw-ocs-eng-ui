@@ -1,8 +1,8 @@
 import { Button, Card, PageHeader, Space, Typography } from 'antd'
 import React from 'react'
+import Provision from '../../features/sm/components/provision/Provision'
 import { useSMStatus } from '../../features/sm/hooks/useSMStatus'
 import styles from './infrastructure.module.css'
-import Provision from '../../features/sm/components/provision/Provision'
 
 const { Meta } = Card
 

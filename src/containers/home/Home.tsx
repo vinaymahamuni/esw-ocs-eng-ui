@@ -1,10 +1,7 @@
-import Icon from '@ant-design/icons'
 import { Card, Col, Row, Typography } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import InfraIcon from '../../assets/images/icons/Infrastructure.svg'
-import SettingsIcon from '../../assets/images/icons/Settings.svg'
-import TelescopeIcon from '../../assets/images/icons/Telescope.svg'
+import { InfraIcon, SettingsIcon, TelescopeIcon } from '../../components/Icons'
 import SMCard from '../../features/sm/components/smcard/SMCard'
 import styles from './home.module.css'
 
@@ -14,27 +11,28 @@ type CardDetail = {
   link: string
 }
 
-const getCardDetails = (title: string, icon: string, link: string) => {
-  return {
-    title,
-    link,
-    icon: (
-      <Icon
-        component={() => <img src={icon} className={styles.commonIconSize} />}
-      />
-    )
-  }
-}
 const cards: CardDetail[] = [
-  getCardDetails('Manage Infrastructure', InfraIcon, '/Infrastructure'),
-  getCardDetails('Manage Observations', TelescopeIcon, '/Observations'),
-  getCardDetails('Resources', SettingsIcon, '/Resources')
+  {
+    title: 'Manage Infrastructure',
+    icon: <InfraIcon className={styles.commonIconSize} fill={'#1890FF'} />,
+    link: '/Infrastructure'
+  },
+  {
+    title: 'Manage Observations',
+    icon: <TelescopeIcon className={styles.commonIconSize} fill={'#9254DE'} />,
+    link: '/Observations'
+  },
+  {
+    title: 'Resources',
+    icon: <SettingsIcon className={styles.settingsIcon} />,
+    link: '/Resources'
+  }
 ]
 
 const HomePageCard = (card: CardDetail) => (
   <Link role={card.title} to={card.link}>
     <Card hoverable className={styles.homePageCards}>
-      <Icon component={() => card.icon} />
+      {card.icon}
       <Typography.Title className={styles.cardTitle} level={3}>
         {card.title}
       </Typography.Title>
