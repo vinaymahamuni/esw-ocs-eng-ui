@@ -1,7 +1,7 @@
 {
   "buildOptions": {
     "clean": true,
-    "sourceMaps": false
+    "sourceMap": true
   },
   "mount": {
     "public": "/",

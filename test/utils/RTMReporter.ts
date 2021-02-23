@@ -12,7 +12,7 @@ const outputFilePath = parseOutput(args) ?? './RTM/testStoryMapping.txt'
 const cwd = path.resolve()
 const OUTPUT_PATH = path.resolve(path.join(cwd, outputFilePath))
 
-export const TestReporter = ({ reportResults = true } = {}): Reporter => {
+export const RTMReporter = ({ reportResults = true } = {}): Reporter => {
   return {
     start() {
       if (fs.existsSync(OUTPUT_PATH)) {

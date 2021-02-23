@@ -1,4 +1,11 @@
-// import type { Reporter, TestSession, TestSuiteResult } from '@web/test-runner'
+/**
+ *  Disclaimer: this file is intentionally kept with .js ext
+ *  it is used as a reporter in web-test-runner.config.js configuration file.
+ *  because transpiling ConsoleReporter.ts -> .js for each and every change to run test in development flow is not neccessary
+ *  hence this file is out of scope of tsconfig.
+ *  source of this file : https://github.com/modernweb-dev/web/issues/229
+ *  once this issue gets fixed. we will remove this file & depend on default reporter to give pretty logging.
+ * */
 
 const colour = {
   reset: '\x1b[0m',
