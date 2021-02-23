@@ -17,7 +17,8 @@
     "prettier",
     "import",
     "react",
-    "react-hooks"
+    "react-hooks",
+    "testing-library"
   ],
   "rules": {
     "@typescript-eslint/explicit-member-accessibility": 0,
