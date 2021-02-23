@@ -42,10 +42,10 @@ const HomePageCard = (card: CardDetail) => (
 
 const Home = (): JSX.Element => (
   <>
-    <Row justify={'center'}>
-      <Col>{<SMCard />}</Col>
-    </Row>
     <Row align={'middle'} className={styles.inheritMinHeight}>
+      <Row className={styles.smCard}>
+        <Col>{<SMCard />}</Col>
+      </Row>
       <Col span={24}>
         <Row gutter={[32, 32]} className={styles.homePageCardsRow}>
           {cards.map((x, index) => (

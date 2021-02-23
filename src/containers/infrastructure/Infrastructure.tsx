@@ -16,7 +16,10 @@ const SmActions = (): JSX.Element => (
 )
 
 const SmStatus = (): JSX.Element => {
-  const { data } = useSMStatus()
+  const { data, isLoading } = useSMStatus()
+  if (isLoading) {
+    return <Typography.Text type='warning'>Loading</Typography.Text>
+  }
   const smStatus = data?.metadata.agentPrefix ? (
     <Typography.Text type='success'>
       Running on {data.metadata.agentPrefix}
@@ -24,6 +27,10 @@ const SmStatus = (): JSX.Element => {
   ) : (
     <Typography.Text type='danger'>Service Down</Typography.Text>
   )
+  return smStatus
+}
+
+const SmStatusCard = (): JSX.Element => {
   return (
     <Space direction='vertical' size={3}>
       <Typography.Text className={styles.pageTitle}>
@@ -33,7 +40,7 @@ const SmStatus = (): JSX.Element => {
         description={
           <>
             <Typography.Text type='secondary'>{' Status: '}</Typography.Text>
-            {smStatus}
+            <SmStatus />
           </>
         }
       />
@@ -51,7 +58,7 @@ const Infrastructure = (): JSX.Element => {
       />
       <Card
         size='default'
-        title={<SmStatus />}
+        title={<SmStatusCard />}
         bodyStyle={{ display: 'none' }}
         extra={<SmActions />}
       />

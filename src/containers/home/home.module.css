@@ -25,3 +25,10 @@
 h3.cardTitle {
   margin-bottom: 0em;
 }
+
+.smCard {
+  top: 65px;
+  position: absolute;
+  width: 88%;
+  justify-content: center;
+}
