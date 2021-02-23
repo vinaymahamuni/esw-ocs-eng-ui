@@ -1,9 +1,3 @@
-import type {
-  AkkaLocation,
-  HttpLocation,
-  Option,
-  TcpConnection
-} from '@tmtsoftware/esw-ts'
 import { Button, Card, PageHeader, Space, Typography } from 'antd'
 import React from 'react'
 import Provision from '../../features/sm/components/provision/Provision'

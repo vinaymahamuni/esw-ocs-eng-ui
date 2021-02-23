@@ -1,4 +1,4 @@
-import { HttpConnection, HttpLocation, Prefix } from '@tmtsoftware/esw-ts'
+import type { HttpLocation } from '@tmtsoftware/esw-ts'
 import { expect } from 'chai'
 import React from 'react'
 import { when } from 'ts-mockito'
