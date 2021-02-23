@@ -1,4 +1,5 @@
-import { fireEvent, render } from '@testing-library/react'
+import {render } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { expect } from 'chai'
 import React from 'react'
 import { SelectionModal } from '../../../src/components/Modal/SelectionModal'
@@ -44,7 +45,7 @@ describe('SelectionModal', () => {
       name: 'data-1'
     })
 
-    fireEvent.click(data1)
+    userEvent.click(data1)
 
     expect(value).eq('data-1')
   })
@@ -66,10 +67,10 @@ describe('SelectionModal', () => {
     const okButton = getByRole('button', { name: /start/i })
     const cancelButton = getByRole('button', { name: /cancel/i })
 
-    fireEvent.click(okButton)
+    userEvent.click(okButton)
     expect(value).eq('Ok')
 
-    fireEvent.click(cancelButton)
+    userEvent.click(cancelButton)
     expect(value).eq('canceled')
   })
 
@@ -89,7 +90,7 @@ describe('SelectionModal', () => {
 
     const okButton = getByRole('button', { name: /start/i })
 
-    fireEvent.click(okButton)
+    userEvent.click(okButton)
     expect(value).eq('value not changed')
   })
 

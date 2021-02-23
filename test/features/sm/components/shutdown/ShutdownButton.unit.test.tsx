@@ -1,4 +1,5 @@
-import { fireEvent, screen, waitFor, within } from '@testing-library/react'
+import { screen, waitFor, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { expect } from 'chai'
 import React from 'react'
 import { verify, when } from 'ts-mockito'
@@ -24,7 +25,7 @@ describe('ShutdownSMButton', () => {
     const shutdownButton = await findByRole('button', { name: /shutdown/i })
 
     //User clicks shutdown button
-    fireEvent.click(shutdownButton)
+    userEvent.click(shutdownButton)
 
     //modal will appear with shutdown button
     await waitFor(() => expect(getByRole('document')).to.exist)
@@ -34,7 +35,7 @@ describe('ShutdownSMButton', () => {
     })
 
     //User clicks modal's shutdown button
-    fireEvent.click(modalShutdownButton)
+    userEvent.click(modalShutdownButton)
 
     await waitFor(() => {
       expect(getByText('Successfully shutdown Sequence Manager')).to.exist

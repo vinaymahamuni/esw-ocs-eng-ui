@@ -1,4 +1,5 @@
-import { fireEvent, screen, waitFor, within } from '@testing-library/react'
+import { screen, waitFor, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import type { HttpLocation } from '@tmtsoftware/esw-ts'
 import { HttpConnection, Prefix } from '@tmtsoftware/esw-ts'
 import { expect } from 'chai'
@@ -36,7 +37,7 @@ describe('SpawnSMButton', () => {
 
     //User clicks spawn button
     const spawnButton = await findByRole('button', { name: /spawn/i })
-    fireEvent.click(spawnButton)
+    userEvent.click(spawnButton)
 
     //modal will appear with spawn button
     await waitFor(
@@ -50,14 +51,14 @@ describe('SpawnSMButton', () => {
     })
 
     //User selects agent machine
-    fireEvent.click(
+    userEvent.click(
       within(modalDocument).getByRole('menuitem', {
         name: agentPrefix.toJSON()
       })
     )
 
     //User clicks modal's spawn button
-    fireEvent.click(modalSpawnButton)
+    userEvent.click(modalSpawnButton)
 
     await waitFor(() => {
       expect(getByText('Successfully spawned Sequence Manager')).to.exist
