@@ -6,7 +6,7 @@ import {
   LocationService,
   SequenceManagerService
 } from '@tmtsoftware/esw-ts'
-import { AgentServiceImpl } from '@tmtsoftware/esw-ts/dist/src/clients/agent-service/AgentServiceImpl'
+import { AgentServiceImpl } from '@tmtsoftware/esw-ts/lib/dist/src/clients/agent-service/AgentServiceImpl'
 import type {
   KeycloakProfile,
   KeycloakPromise,
@@ -33,13 +33,12 @@ const getMockAuth = (loggedIn: boolean) => {
       return Promise.resolve() as KeycloakPromise<void, void>
     },
     token: () => 'token string',
-    tokenParsed: () => ('token string' as unknown) as KeycloakTokenParsed,
+    tokenParsed: () =>
+      ({ preferred_username: 'esw-user' } as KeycloakTokenParsed),
     realmAccess: () => ([''] as unknown) as KeycloakRoles,
     resourceAccess: () => ([''] as unknown) as KeycloakResourceAccess,
     loadUserProfile: () =>
-      Promise.resolve({
-        username: loggedInValue ? 'ESW-USER' : ''
-      }) as KeycloakPromise<KeycloakProfile, void>
+      Promise.resolve({}) as KeycloakPromise<KeycloakProfile, void>
   }
 }
 

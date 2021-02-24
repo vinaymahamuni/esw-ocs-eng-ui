@@ -11,11 +11,9 @@ const HeaderBar = (): JSX.Element => {
   const [username, setUsername] = useState<string | undefined>(undefined)
 
   useEffect(() => {
-    //TODO: cleanup function needed here. to fix the warning `Can't perform a React state update on an unmounted component.`
-    auth?.isAuthenticated() &&
-      auth?.loadUserProfile().then((n) => {
-        setUsername(n.username)
-      })
+    !!auth &&
+      !!auth.isAuthenticated() &&
+      setUsername(auth.tokenParsed()?.preferred_username)
   }, [auth])
 
   const confirmLogout = () => {
